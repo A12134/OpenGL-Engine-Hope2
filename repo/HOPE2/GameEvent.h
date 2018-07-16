@@ -21,6 +21,9 @@ public:
 	GameEvent(Window* _window);
 
 public:
+	void HookLogManager();
+
+public:
 	EGameState getCurrentState() { return mCurrentState; }
 	void setCurrentState(EGameState state);
 
