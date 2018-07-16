@@ -57,6 +57,5 @@ void GameEvent::render()
 
 GameEvent::~GameEvent()
 {
-	delete this->mGameWindow;
 	mGameWindow = nullptr;
 }

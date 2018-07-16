@@ -15,6 +15,8 @@ int main()
 
 	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(Window).");
 	Window::mLogManager = engineLog;
+	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(GameEvent).");
+	GameEvent::mLogManager = engineLog;
 
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -39,8 +41,6 @@ int main()
 
 	GameEvent* gameEvent = new GameEvent(mainWindow);
 	engineLog->addLog(ELogType::E_EVENT, "Initializing Game events.");
-	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(GameEvent).");
-	GameEvent::mLogManager = engineLog;
 	engineLog->addLog(ELogType::E_EVENT, "Finish initialization, starting ticks.");
 
 	// main loop
@@ -62,6 +62,10 @@ int main()
 	}
 	
 	engineLog->addLog(ELogType::E_EVENT, "Engine shutdown.");
+
+	delete gameEvent;
+	gameEvent = nullptr;
+
 	delete mainWindow;
 	mainWindow = nullptr;
 
