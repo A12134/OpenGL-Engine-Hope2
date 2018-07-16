@@ -45,8 +45,8 @@ void Shader::loadShaderSource(const std::string & filePath)
 	file.close();
 	mLogManager->addLog(ELogType::E_EVENT, "Load shader source from " + filePath + ".");
 
-	this->mShaderSource = stream.str();
-	const char* sourceChar = this->mShaderSource.c_str();
+	std::string mShaderSource = stream.str();
+	const char* sourceChar = mShaderSource.c_str();
 	glShaderSource(this->mShaderAddress, 1, &sourceChar, NULL);
 	glCompileShader(this->mShaderAddress);
 

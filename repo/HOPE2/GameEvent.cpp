@@ -16,7 +16,9 @@ GameEvent::GameEvent(Window * _window)
 void GameEvent::HookLogManager()
 {
 	Shader::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader).");
 	ShaderProgram::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
 }
 
 void GameEvent::setCurrentState(EGameState state)

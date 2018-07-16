@@ -17,7 +17,7 @@ class Shader
 public:
 	static LogManager* mLogManager;
 private:
-	std::string mShaderSource;
+	//std::string mShaderSource;
 	unsigned int mShaderAddress;
 	EShaderType mShaderType;
 
