@@ -146,12 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEvent.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
