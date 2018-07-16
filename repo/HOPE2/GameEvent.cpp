@@ -6,7 +6,7 @@ LogManager* GameEvent::mLogManager;
 
 GameEvent::GameEvent(Window * _window)
 {
-	this->mCurrentState = EGameState::E_Debugging;
+	this->setCurrentState(EGameState::E_Debugging);
 	this->mGameWindow = _window;
 }
 
@@ -16,6 +16,7 @@ void GameEvent::setCurrentState(EGameState state)
 	{
 	case EGameState::E_Debugging:
 		// init debugging code here
+		mLogManager->addLog(ELogType::E_EVENT, "(Game Event State)Enter Debugging state.");
 		break;
 	default:
 		break;
@@ -56,4 +57,6 @@ void GameEvent::render()
 
 GameEvent::~GameEvent()
 {
+	delete this->mGameWindow;
+	mGameWindow = nullptr;
 }

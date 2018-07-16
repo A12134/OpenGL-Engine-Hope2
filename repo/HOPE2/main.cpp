@@ -2,6 +2,7 @@
 #include "GLFW\glfw3.h"
 #include "Window.h"
 #include "LogManager.h"
+#include "GameEvent.h"
 
 #define RESOLUTION_X 1366	// window width
 #define RESOLUTION_Y 768	// window height
@@ -12,6 +13,7 @@ int main()
 	// initialization
 	LogManager* engineLog = new LogManager();
 
+	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(Window).");
 	Window::mLogManager = engineLog;
 
 	glfwInit();
@@ -34,13 +36,26 @@ int main()
 	mainWindow->enableDepthTest();
 	mainWindow->enableMSAA();
 	mainWindow->enableFaceCulling();
+
+	GameEvent* gameEvent = new GameEvent(mainWindow);
+	engineLog->addLog(ELogType::E_EVENT, "Initializing Game events.");
+	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(GameEvent).");
+	GameEvent::mLogManager = engineLog;
 	engineLog->addLog(ELogType::E_EVENT, "Finish initialization, starting ticks.");
 
 	// main loop
+	float OTSS = 0;		// old time since loop start
 	while (!glfwWindowShouldClose(mainWindow->getWindow()))
 	{
+		float TSS = (float)glfwGetTime();	// time since loop start
+		float deltaSec = TSS - OTSS;		// calculate deltaSeconds
+		OTSS = TSS;
 		mainWindow->clearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		mainWindow->clearBuffers();
+
+		// loop throught gameEvent
+		gameEvent->update(deltaSec);
+		gameEvent->render();
 
 		mainWindow->swapBuffer();
 		glfwPollEvents();	
