@@ -1,5 +1,6 @@
 #include "GameEvent.h"
 #include "Shader.h"
+#include "ShaderProgram.h"
 
 // static object pre-declaration
 LogManager* GameEvent::mLogManager;
@@ -15,6 +16,7 @@ GameEvent::GameEvent(Window * _window)
 void GameEvent::HookLogManager()
 {
 	Shader::mLogManager = this->mLogManager;
+	ShaderProgram::mLogManager = this->mLogManager;
 }
 
 void GameEvent::setCurrentState(EGameState state)

@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "LogManager.h"
 
+
 enum class EGameState 
 {
 	E_Debugging
