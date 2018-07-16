@@ -324,3 +324,9 @@ ASALocalRun/
 # NVidia Nsight GPU debugger configuration file
 *.nvuser
 
+repo/HOPE2/libs/assimp-vc140-mt.dll
+repo/HOPE2/libs/assimp-vc140-mt.exp
+repo/HOPE2/libs/assimp-vc140-mt.ilk
+repo/HOPE2/libs/assimp-vc140-mt.lib
+repo/HOPE2/libs/assimp-vc140-mt.pdb
+repo/HOPE2/libs/glfw3.lib
