@@ -1,7 +1,8 @@
 #include "SimpleCamera.h"
 
 LogManager* SimpleCamera::mLogManager;
-
+double SimpleCamera::mMouseXNew = 0.0f;
+double SimpleCamera::mMouseYNew = 0.0f;
 
 SimpleCamera::SimpleCamera(vec3 camPos, vec3 camTarget, float fov, float width, float height, float nearz, float farz):
 	BaseCamera(fov, width, height, nearz, farz)
