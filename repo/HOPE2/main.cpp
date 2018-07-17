@@ -39,8 +39,8 @@ int main()
 	mainWindow->enableMSAA();
 	mainWindow->enableFaceCulling();
 
-	GameEvent* gameEvent = new GameEvent(mainWindow);
 	engineLog->addLog(ELogType::E_EVENT, "Initializing Game events.");
+	GameEvent* gameEvent = new GameEvent(mainWindow);
 	engineLog->addLog(ELogType::E_EVENT, "Finish initialization, starting ticks.");
 
 	// main loop

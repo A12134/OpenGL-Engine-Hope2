@@ -9,6 +9,14 @@ ShaderManager::ShaderManager()
 
 ShaderManager::~ShaderManager()
 {
+	mLogManager->addLog(ELogType::E_EVENT, "Unloading shaders.");
+	for (unsigned int i = 0; i < mShaders.size(); i++)
+	{
+		delete mShaders.at(i);
+		mShaders.at(i) = nullptr;
+	}
+
+	mShaders.clear();
 }
 
 void ShaderManager::createNewShader(const std::string vertexShaderSource, const std::string shaderName)

@@ -72,5 +72,8 @@ void GameEvent::render()
 
 GameEvent::~GameEvent()
 {
+	delete mShaderManager;
+	mShaderManager = nullptr;
+
 	mGameWindow = nullptr;
 }
