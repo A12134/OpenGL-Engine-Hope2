@@ -51,6 +51,11 @@ void ShaderProgram::checkLinkStatus()
 	}
 }
 
+void ShaderProgram::useThis()
+{
+	glUseProgram(this->mProgramID);
+}
+
 void ShaderProgram::setUniform1f(const char * var, float f1)
 {
 	GLint loc = glGetUniformLocation(this->mProgramID, var);
