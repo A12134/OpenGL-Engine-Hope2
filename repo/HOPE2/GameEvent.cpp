@@ -1,6 +1,7 @@
 #include "GameEvent.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
+#include "BaseCamera.h"
 
 // static object pre-declaration
 LogManager* GameEvent::mLogManager;
@@ -11,6 +12,8 @@ GameEvent::GameEvent(Window * _window)
 	this->setCurrentState(EGameState::E_Debugging);
 	this->mGameWindow = _window;
 	HookLogManager(); 
+	BaseCamera::mWindow = this->mGameWindow;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook cameras with the window.");
 	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
 	this->mShaderManager = new ShaderManager();
 }
@@ -23,6 +26,8 @@ void GameEvent::HookLogManager()
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
 	ShaderManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Manager).");
+	BaseCamera::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Base Camera).");
 }
 
 void GameEvent::setCurrentState(EGameState state)

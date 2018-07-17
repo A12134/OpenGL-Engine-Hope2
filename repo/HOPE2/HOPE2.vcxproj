@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseCamera.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="LogManager.cpp" />
@@ -154,9 +155,11 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="SimpleCamera.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseCamera.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Mesh.h" />
@@ -164,6 +167,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="SimpleCamera.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
