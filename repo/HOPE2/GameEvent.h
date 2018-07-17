@@ -2,7 +2,7 @@
 #define GAME_EVENT_H
 #include "Window.h"
 #include "LogManager.h"
-
+#include "ShaderManager.h"
 
 enum class EGameState 
 {
@@ -15,8 +15,9 @@ public:
 	static LogManager* mLogManager;	// engine log manager
 
 private:
-	EGameState mCurrentState;	// game state
-	Window * mGameWindow;		// game window
+	EGameState mCurrentState;		// game state
+	Window * mGameWindow;			// game window
+	ShaderManager* mShaderManager;	// GLSL shader manager
 
 public:
 	GameEvent(Window* _window);

@@ -10,7 +10,9 @@ GameEvent::GameEvent(Window * _window)
 {
 	this->setCurrentState(EGameState::E_Debugging);
 	this->mGameWindow = _window;
-	HookLogManager();
+	HookLogManager(); 
+	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
+	this->mShaderManager = new ShaderManager();
 }
 
 void GameEvent::HookLogManager()
@@ -19,6 +21,8 @@ void GameEvent::HookLogManager()
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader).");
 	ShaderProgram::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
+	ShaderManager::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Manager).");
 }
 
 void GameEvent::setCurrentState(EGameState state)
