@@ -31,5 +31,21 @@ public:
 	SimpleCamera(vec3 camPos, vec3 camTarget,
 		float left, float right, float bot, float top, float nearz, float farz);
 	~SimpleCamera();
+
+private:
+	void setupCamera(vec3 camPos, vec3 camTarget);
+	void inputController(float deltaSec);
+
+public:
+	mat4 getViewMatrix();
+
+	void update(float deltaSec);
+
+public:
+
+	// callbacks 
+	static void getMousePosition_CallBack(GLFWwindow* window, double _mouseX, double _mouseY);
+	static void getMouseButton_CallBack(GLFWwindow* window, int button, int action, int mods);
+
 };
 #endif
