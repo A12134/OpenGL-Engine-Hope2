@@ -6,7 +6,6 @@ class SimpleCamera:
 	public BaseCamera
 {
 public:
-	static LogManager* mLogManager;
 	static double mMouseXNew, mMouseYNew;
 
 private:

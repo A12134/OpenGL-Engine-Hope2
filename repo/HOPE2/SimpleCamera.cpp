@@ -1,8 +1,8 @@
 #include "SimpleCamera.h"
 
-LogManager* SimpleCamera::mLogManager;
 double SimpleCamera::mMouseXNew = 0.0f;
 double SimpleCamera::mMouseYNew = 0.0f;
+bool SimpleCamera::mChangeViewAngle = false;
 
 SimpleCamera::SimpleCamera(vec3 camPos, vec3 camTarget, float fov, float width, float height, float nearz, float farz):
 	BaseCamera(fov, width, height, nearz, farz)
@@ -18,6 +18,7 @@ SimpleCamera::SimpleCamera(vec3 camPos, vec3 camTarget, float left, float right,
 
 SimpleCamera::~SimpleCamera()
 {
+	this->mLogManager->addLog(ELogType::E_EVENT, "Destory Camera Object.");
 }
 
 void SimpleCamera::setupCamera(vec3 camPos, vec3 camTarget)
