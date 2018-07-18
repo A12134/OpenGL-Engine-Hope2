@@ -16,6 +16,7 @@ GameEvent::GameEvent(Window * _window)
 	mLogManager->addLog(ELogType::E_EVENT, "Hook cameras with the window.");
 	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
 	this->mShaderManager = new ShaderManager();
+	this->mMeshManager = new MeshManager();
 
 	// init camera
 	this->mCamera = new SimpleCamera(
@@ -38,6 +39,8 @@ void GameEvent::HookLogManager()
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
 	ShaderManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Manager).");
+	MeshManager::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Mesh Manager).");
 	BaseCamera::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Base Camera).");
 }
@@ -89,6 +92,9 @@ void GameEvent::render()
 
 GameEvent::~GameEvent()
 {
+	delete mMeshManager;
+	mMeshManager = nullptr;
+
 	delete mCamera;
 	mCamera = nullptr;
 

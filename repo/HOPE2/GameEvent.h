@@ -4,6 +4,7 @@
 #include "LogManager.h"
 #include "ShaderManager.h"
 #include "SimpleCamera.h"
+#include "MeshManager.h"
 
 enum class EGameState 
 {
@@ -20,6 +21,7 @@ private:
 	Window * mGameWindow;			// game window
 	ShaderManager* mShaderManager;	// GLSL shader manager
 	SimpleCamera* mCamera;			// game Camera
+	MeshManager* mMeshManager;		// game mesh Manager
 
 public:
 	GameEvent(Window* _window);
