@@ -6,3 +6,5 @@
 - assimp-vc140-mt.lib
 - assimp-vc140-mt.pdb
 - glfw3.lib
+
+###### Old project: https://github.com/A12134/Hope
