@@ -1,3 +1,7 @@
+/*
+TODO: discard this class
+*/
+
 #ifndef MESH_MANAGER_H
 #define MESH_MANAGER_H
 #include "LogManager.h"

@@ -17,6 +17,7 @@ GameEvent::GameEvent(Window * _window)
 	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
 	this->mShaderManager = new ShaderManager();
 	this->mMeshManager = new MeshManager();
+	this->mTextureManager = new TextureManager();
 
 	// init camera
 	this->mCamera = new SimpleCamera(
@@ -43,6 +44,8 @@ void GameEvent::HookLogManager()
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Mesh Manager).");
 	BaseCamera::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Base Camera).");
+	TextureManager::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Texture Manager).");
 }
 
 void GameEvent::setCurrentState(EGameState state)

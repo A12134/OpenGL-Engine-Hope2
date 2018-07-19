@@ -146,8 +146,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\workload\repo\Hope\Hope\stb_image.cpp" />
     <ClCompile Include="BaseCamera.cpp" />
     <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -157,19 +159,22 @@
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="SimpleCamera.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\workload\repo\Hope\Hope\stb_image.h" />
     <ClInclude Include="BaseCamera.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
-    <ClInclude Include="Patch.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="SimpleCamera.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

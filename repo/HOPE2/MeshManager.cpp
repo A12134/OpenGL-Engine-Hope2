@@ -1,3 +1,8 @@
+/*
+
+TODO: Discard this class
+*/
+
 #include "MeshManager.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>

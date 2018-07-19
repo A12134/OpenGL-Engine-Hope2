@@ -5,6 +5,7 @@
 #include "ShaderManager.h"
 #include "SimpleCamera.h"
 #include "MeshManager.h"
+#include "TextureManager.h"
 
 enum class EGameState 
 {
@@ -17,11 +18,12 @@ public:
 	static LogManager* mLogManager;	// engine log manager
 
 private:
-	EGameState mCurrentState;		// game state
-	Window * mGameWindow;			// game window
-	ShaderManager* mShaderManager;	// GLSL shader manager
-	SimpleCamera* mCamera;			// game Camera
-	MeshManager* mMeshManager;		// game mesh Manager
+	EGameState mCurrentState;			// game state
+	Window * mGameWindow;				// game window
+	ShaderManager* mShaderManager;		// GLSL shader manager
+	SimpleCamera* mCamera;				// game Camera
+	MeshManager* mMeshManager;			// game mesh Manager
+	TextureManager* mTextureManager;	// game texture Manager
 
 public:
 	GameEvent(Window* _window);
