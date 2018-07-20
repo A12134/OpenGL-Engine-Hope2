@@ -8,14 +8,16 @@ GameObject::GameObject()
 	mMaterial = nullptr;
 }
 
-GameObject::GameObject(std::string meshFile, std::vector<Texture*> texes)
+GameObject::GameObject(std::string meshFile, Material* mat)
 {
-	mMaterial = nullptr;
+	mMaterial = mat;
+	loadModel(meshFile);
 }
 
 GameObject::GameObject(std::string meshFile)
 {
 	mMaterial = nullptr;
+	loadModel(meshFile);
 }
 
 GameObject::~GameObject()

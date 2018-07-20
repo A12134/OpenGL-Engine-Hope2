@@ -22,7 +22,7 @@ private:
 
 public:
 	GameObject();
-	GameObject(std::string meshFile, std::vector<Texture *> texes);
+	GameObject(std::string meshFile, Material* mat);
 	// GameObject(model, texture)
 	GameObject(std::string meshFile);
 	// GameObject(model)	// obj file cames with texture
@@ -32,5 +32,8 @@ private:
 	void loadModel(std::string fileName);
 	void processNode(aiNode * node, const aiScene * scene, std::string fileName, std::string directory);
 	Mesh* processMesh(aiMesh * mesh, const aiScene * scene, std::string fileName, std::string directory);
+
+public:
+
 };
 #endif
