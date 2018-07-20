@@ -14,43 +14,64 @@ TextureManager::~TextureManager()
 {
 }
 
-void TextureManager::addToMaterial(Material * mat, Texture tex, int num)
+Material* TextureManager::createMaterial(std::string name)
 {
+	Material* ptr = getMaterials(name);
+	if (ptr == nullptr) 
+	{
+		Material tmp;
+		tmp.mName = name;
+		this->mMaterials.push_back(tmp);
+		return &this->mMaterials.at(mMaterials.size() - 1);
+	}
+	mLogManager->addLog(ELogType::E_WARNING, "Material name " + name + " already exist.");
+	return ptr;
 }
 
-
-std::vector<Texture>* TextureManager::getTextures(int num, Material* mat)
+std::vector<Texture>* TextureManager::getTextures(E_TEX_TYPE type, Material* mat)
 {
-	switch (num)
+	if (mat != nullptr)
 	{
-	case 1:
-		return &mat->mDiffs;
-		break;
-	case 2:
-		return &mat->mOpacs;
-		break;
-	case 3:
-		return &mat->mNorms;
-		break;
-	case 4:
-		return &mat->mSpecs;
-		break;
-	case 5:
-		return &mat->mAmbients;
-		break;
-	default:
-		return nullptr;
-		break;
+		switch (type)
+		{
+		case E_TEX_TYPE::DIFFUSE:
+			return &mat->mDiffs;
+			break;
+		case E_TEX_TYPE::OPACITY:
+			return &mat->mOpacs;
+			break;
+		case E_TEX_TYPE::NORMAL:
+			return &mat->mNorms;
+			break;
+		case E_TEX_TYPE::SPECULAR:
+			return &mat->mSpecs;
+			break;
+		case E_TEX_TYPE::AMBIENT:
+			return &mat->mAmbients;
+			break;
+		default:
+			return nullptr;
+			break;
+		}
 	}
+	mLogManager->addLog(ELogType::E_WARNING, "Does not find the material.");
 	return nullptr;
 }
 
 Material * TextureManager::getMaterials(std::string matName)
 {
+	for (unsigned int i = 0; i < this->mMaterials.size(); i++)
+	{
+		if (mMaterials.at(i).mName == matName)
+		{
+			return &mMaterials.at(i);
+		}
+	}
+	mLogManager->addLog(ELogType::E_WARNING, "Material " + matName + " does not exist. ");
 	return nullptr;
 }
 
-void TextureManager::loadImage(const char * filename, E_TEX_TYPE type)
+void TextureManager::loadImage(const char * filename, E_TEX_TYPE type, Material* mat)
 {
 	Texture tmpTex;
 
@@ -96,19 +117,21 @@ void TextureManager::loadImage(const char * filename, E_TEX_TYPE type)
 	switch (type)
 	{
 	case E_TEX_TYPE::DIFFUSE:
-		
+		mat->mDiffs.push_back(tmpTex);
 		break;
 	case E_TEX_TYPE::OPACITY:
+		mat->mOpacs.push_back(tmpTex);
 		break;
 	case E_TEX_TYPE::NORMAL:
+		mat->mNorms.push_back(tmpTex);
 		break;
 	case E_TEX_TYPE::SPECULAR:
+		mat->mSpecs.push_back(tmpTex);
 		break;
 	case E_TEX_TYPE::AMBIENT:
+		mat->mAmbients.push_back(tmpTex);
 		break;
 	default:
 		break;
 	}
-
-	this->mTextures.push_back(tmpTex);
 }

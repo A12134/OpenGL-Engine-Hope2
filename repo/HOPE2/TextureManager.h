@@ -1,9 +1,3 @@
-/*TODO: 
-	- simplify enum classes
-	- figure out the relationships between materials and textures
-	- write the method to access the texture from the material efficiently
-*/
-
 #ifndef TEXTURE_MANAGER_H
 #define TEXTURE_MANAGER_H
 #include "LogManager.h"
@@ -57,32 +51,14 @@ public:
 public:
 	TextureManager();
 	~TextureManager();
-	
-	/*
-	@param:
-	num: an integer
-	1: diffuse maps
-	2: opacity maps
-	3: normal maps
-	4: specular maps
-	5: ambient maps
-	*/
-	void addToMaterial(Material* mat, Texture tex, int num);
 
-	/*
-	@param:	
-		num: an integer
-		1: diffuse maps
-		2: opacity maps
-		3: normal maps
-		4: specular maps
-		5: ambient maps
-	*/
-	std::vector<Texture>* getTextures(int num, Material* mat);
+	Material* createMaterial(std::string name);
+
+	std::vector<Texture>* getTextures(E_TEX_TYPE type, Material* mat);
 
 	Material* getMaterials(std::string matName);
 
-	void loadImage(const char* filename, E_TEX_TYPE type);
+	void loadImage(const char* filename, E_TEX_TYPE type, Material* mat);
 };
 #endif
 
