@@ -154,7 +154,6 @@
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
@@ -169,7 +168,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="ShaderProgram.h" />
