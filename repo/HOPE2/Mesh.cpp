@@ -43,10 +43,15 @@ void Mesh::initMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection)
+void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Material* mat)
 {
 	sp->useThis();
 	//TODO: add texture
+	// load diffuse
+	// load normal
+	// load opacity
+	// load ambient
+	// load specular
 
 	// TODO: load in matrix
 	mat4 matrices = projection * view * model;

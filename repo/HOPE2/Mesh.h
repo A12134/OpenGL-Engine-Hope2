@@ -8,6 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include "TextureManager.h"
 
 using namespace glm;
 using namespace std;
@@ -38,7 +39,7 @@ private:
 
 public:
 
-	void render(ShaderProgram* sp, mat4 model, mat4 view, mat4 projection);
+	void render(ShaderProgram* sp, mat4 model, mat4 view, mat4 projection, Material* mat);
 
 
 };

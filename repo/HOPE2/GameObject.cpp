@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "SimpleCamera.h"
 
 LogManager* GameObject::mLogManager;
 TextureManager* GameObject::mTexManager;
@@ -8,15 +9,19 @@ GameObject::GameObject()
 	mMaterial = nullptr;
 }
 
-GameObject::GameObject(std::string meshFile, Material* mat)
+GameObject::GameObject(std::string meshFile, Material* mat, transformation trans, ShaderProgram* sp)
 {
 	mMaterial = mat;
+	this->mTransform = trans;
+	this->sp = sp;
 	loadModel(meshFile);
 }
 
-GameObject::GameObject(std::string meshFile)
+GameObject::GameObject(std::string meshFile, transformation trans, ShaderProgram* sp)
 {
 	mMaterial = nullptr;
+	this->mTransform = trans;
+	this->sp = sp;
 	loadModel(meshFile);
 }
 
@@ -172,4 +177,17 @@ Mesh * GameObject::processMesh(aiMesh * mesh, const aiScene * scene, std::string
 	}
 	
 	return new Mesh(vertices, indices);
+}
+
+void GameObject::render(SimpleCamera * cam)
+{
+	mat4 model = mat4(1.0f);
+	model = translate(model, mTransform.position);
+	model = scale(model, mTransform.scale);
+	model = rotate(model, radians(mTransform.rotation), vec3(0.0f, 1.0f, 0.0f));
+
+	for (unsigned int i = 0; i < this->mMeshes.size(); i++)
+	{
+		mMeshes.at(i)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix, this->mMaterial);
+	}
 }
