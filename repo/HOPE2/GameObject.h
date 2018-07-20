@@ -17,6 +17,7 @@ public:
 
 private:
 	std::vector<Mesh *> mMeshes;
+	Material* mMaterial;
 	std::vector<Texture *> mTexes;
 
 public:
@@ -29,7 +30,7 @@ public:
 
 private:
 	void loadModel(std::string fileName);
-	void processNode(aiNode * node, const aiScene * scene);
-	Mesh* processMesh(aiMesh * mesh, const aiScene * scene);
+	void processNode(aiNode * node, const aiScene * scene, std::string fileName, std::string directory);
+	Mesh* processMesh(aiMesh * mesh, const aiScene * scene, std::string fileName, std::string directory);
 };
 #endif
