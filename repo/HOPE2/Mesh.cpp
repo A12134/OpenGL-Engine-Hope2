@@ -46,19 +46,97 @@ void Mesh::initMesh()
 void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Material* mat)
 {
 	sp->useThis();
-	//TODO: add texture
+	unsigned int texCount = 0;
+	unsigned int texArray[10];
 	// load diffuse
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		if (i < mat->mDiffs.size())
+		{
+			glActiveTexture(GL_TEXTURE0 + texCount);
+			glBindTexture(GL_TEXTURE_2D, mat->mDiffs.at(i).mTextureID);
+			texCount++;
+			texArray[i] = texCount;
+		}
+		else
+		{
+			texArray[i] = 999;
+		}
+	}
+	sp->setUniform1uiv("diffuseMap", 10, texArray);
 	// load normal
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		if (i < mat->mNorms.size())
+		{
+			glActiveTexture(GL_TEXTURE0 + texCount);
+			glBindTexture(GL_TEXTURE_2D, mat->mNorms.at(i).mTextureID);
+			texCount++;
+			texArray[i] = texCount;
+		}
+		else
+		{
+			texArray[i] = 999;
+		}
+	}
+	sp->setUniform1uiv("normalMap", 10, texArray);
 	// load opacity
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		if (i < mat->mOpacs.size())
+		{
+			glActiveTexture(GL_TEXTURE0 + texCount);
+			glBindTexture(GL_TEXTURE_2D, mat->mOpacs.at(i).mTextureID);
+			texCount++;
+			texArray[i] = texCount;
+		}
+		else
+		{
+			texArray[i] = 999;
+		}
+	}
+	sp->setUniform1uiv("opacityMap", 10, texArray);
 	// load ambient
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		if (i < mat->mAmbients.size())
+		{
+			glActiveTexture(GL_TEXTURE0 + texCount);
+			glBindTexture(GL_TEXTURE_2D, mat->mAmbients.at(i).mTextureID);
+			texCount++;
+			texArray[i] = texCount;
+		}
+		else
+		{
+			texArray[i] = 999;
+		}
+	}
+	sp->setUniform1uiv("ambientMap", 10, texArray);
 	// load specular
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		if (i < mat->mSpecs.size())
+		{
+			glActiveTexture(GL_TEXTURE0 + texCount);
+			glBindTexture(GL_TEXTURE_2D, mat->mSpecs.at(i).mTextureID);
+			texCount++;
+			texArray[i] = texCount;
+		}
+		else
+		{
+			texArray[i] = 999;
+		}
+	}
+	sp->setUniform1uiv("specularMap", 10, texArray);
 
-	// TODO: load in matrix
 	mat4 matrices = projection * view * model;
 	sp->setUniformMatrix4x4fv("transformation", matrices, GL_FALSE);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, this->mIndices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+
+	// set back to default
+	glActiveTexture(GL_TEXTURE0);
 
 }
