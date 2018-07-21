@@ -9,7 +9,7 @@ uniform sampler2D amibentMap[10];
 in vec2 texCoord;
 in vec3 debugPos;
 out vec4 FragColor;
-
+in mat4 t;
 void main()
 {
 	vec4 diffuse = vec4(0,0,0,0);
@@ -17,5 +17,5 @@ void main()
 	{
 		diffuse += texture(diffuseMap[i], texCoord);
 	}
-	FragColor = vec4(debugPos,1.0);
+	FragColor = t[0];
 }

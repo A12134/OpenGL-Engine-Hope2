@@ -2,10 +2,49 @@
 
 LogManager* Mesh::mLogManager;
 
+
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices)
 {
-	this->mVertices = vertices;
-	this->mIndices = indices;
+	//this->mVertices = vertices;
+	//this->mIndices = indices;
+
+	Vertex v1;
+	v1.mPosition = vec3(0.5f, 0.5f, 0.0f);
+	v1.mNormal = vec3(1);
+	v1.mBiTangent = vec3(1);
+	v1.mTangent = vec3(1);
+	v1.mTexCoords = vec2(1);
+	Vertex v2;
+	v2.mPosition = vec3(0.5f, -0.5f, 0.0f);
+	v2.mNormal = vec3(1);
+	v2.mBiTangent = vec3(1);
+	v2.mTangent = vec3(1);
+	v2.mTexCoords = vec2(1);
+	Vertex v3;
+	v3.mPosition = vec3(-0.5f, -0.5f, 0.0f);
+	v3.mNormal = vec3(1);
+	v3.mBiTangent = vec3(1);
+	v3.mTangent = vec3(1);
+	v3.mTexCoords = vec2(1);
+	Vertex v4;
+	v4.mPosition = vec3(-0.5f, 0.5f, 0.0f);
+	v4.mNormal = vec3(1);
+	v4.mBiTangent = vec3(1);
+	v4.mTangent = vec3(1);
+	v4.mTexCoords = vec2(1);
+
+	this->mVertices.push_back(v1);
+	this->mVertices.push_back(v2);
+	this->mVertices.push_back(v3);
+	this->mVertices.push_back(v4);
+
+	this->mIndices.push_back(0);
+	this->mIndices.push_back(1);
+	this->mIndices.push_back(3);
+	this->mIndices.push_back(1);
+	this->mIndices.push_back(2);
+	this->mIndices.push_back(3);
+
 	initMesh();
 }
 
@@ -129,8 +168,10 @@ void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Ma
 	}
 	sp->setUniform1uiv("specularMap", 10, texArray);
 
-	mat4 matrices = projection * view * model;
-	sp->setUniformMatrix4x4fv("transformation", mat4(1), GL_FALSE);
+	mat4 matrices =  model;
+	//sp->setUniformMatrix4x4fv("transform", matrices, GL_FALSE);
+	unsigned int transformationLoc = glGetUniformLocation(sp->getID(), "transform");
+	glUniformMatrix4fv(transformationLoc, 1, GL_FALSE, value_ptr(matrices));
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, this->mIndices.size(), GL_UNSIGNED_INT, 0);

@@ -5,12 +5,13 @@ layout (location = 2) in vec2 aTexCoord;
 layout (location = 3) in vec3 aTangent;
 layout (location = 4) in vec3 aBitangent;
 
-uniform mat4 transformation;
+uniform mat4 transform;
 out vec2 texCoord;
 out vec3 debugPos;
+out mat4 t;
 void main()
 {
-	gl_Position = vec4(aPos, 1.0);
+	gl_Position = transform * vec4(aPos, 1.0);
 	texCoord = aTexCoord;
 	debugPos = aPos;
 }

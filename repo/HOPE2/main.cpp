@@ -37,7 +37,7 @@ int main()
 	mainWindow->freezeWindowSize(RESOLUTION_X, RESOLUTION_Y);
 	mainWindow->enableDepthTest();
 	mainWindow->enableMSAA();
-	mainWindow->enableFaceCulling();
+	//mainWindow->enableFaceCulling();
 
 	engineLog->addLog(ELogType::E_EVENT, "Initializing Game events.");
 	GameEvent* gameEvent = new GameEvent(mainWindow);

@@ -21,8 +21,8 @@ GameEvent::GameEvent(Window * _window)
 
 	// init camera
 	this->mCamera = new SimpleCamera(
-		vec3(0.0f, 0.0f, -1.0f),
-		vec3(0.0f, 0.0f, 0.1f),
+		vec3(0.0f, 10.0f, -30.0f),
+		vec3(0.0f, 0.0f, 0.0f),
 		65.0f,
 		1366.0f,
 		768.0f,
@@ -39,7 +39,7 @@ GameEvent::GameEvent(Window * _window)
 	this->mGameObjects.push_back(
 		new GameObject(
 			"assets/nanoSuit//nanosuit.obj",
-			transformation(vec3(0.0f), 0.0f, vec3(1.0f)),
+			transformation(vec3(0.0f, 1.0f, 0.0f), 0.0f, vec3(0.1f)),
 			mShaderManager->getShader("sampleShader")
 		)
 	);
