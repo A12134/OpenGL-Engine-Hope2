@@ -128,6 +128,12 @@ void ShaderProgram::setUniform4ui(const char * var, unsigned int ui1, unsigned i
 	glUniform4ui(loc, ui1, ui2, ui3, ui4);
 }
 
+void ShaderProgram::setUniform1fv(const char * var, unsigned int size, float arr[])
+{
+	GLint loc = glGetUniformLocation(this->mProgramID, var);
+	glUniform1fv(loc, size, arr);
+}
+
 void ShaderProgram::setUniform2fv(const char * var, glm::vec2 vec2)
 {
 	GLint loc = glGetUniformLocation(this->mProgramID, var);
@@ -144,6 +150,12 @@ void ShaderProgram::setUniform4fv(const char * var, glm::vec4 vec4)
 {
 	GLint loc = glGetUniformLocation(this->mProgramID, var);
 	glUniform4fv(loc, 1, glm::value_ptr(vec4));
+}
+
+void ShaderProgram::setUniform1iv(const char * var, unsigned int size, int arr[])
+{
+	GLint loc = glGetUniformLocation(this->mProgramID, var);
+	glUniform1iv(loc, size, arr);
 }
 
 void ShaderProgram::setUniform2iv(const char * var, glm::ivec2 ivec2)
@@ -164,12 +176,11 @@ void ShaderProgram::setUniform4iv(const char * var, glm::ivec4 ivec4)
 	glUniform4iv(loc, 1, glm::value_ptr(ivec4));
 }
 
-/*
-void ShaderProgram::setUniform1uiv(const char * var, glm::uvec1 uvec1)
+void ShaderProgram::setUniform1uiv(const char * var, unsigned int size, unsigned int arr[])
 {
-GLint loc = glGetUniformLocation(this->mProgramID, var);
-glUniform1uiv(loc, 1, glm::value_ptr(uvec1));
-}*/
+	GLint loc = glGetUniformLocation(this->mProgramID, var);
+	glUniform1uiv(loc, size, arr);
+}
 
 void ShaderProgram::setUniform2uiv(const char * var, glm::uvec2 uvec2)
 {
