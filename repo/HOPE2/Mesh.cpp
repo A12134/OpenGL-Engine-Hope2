@@ -37,7 +37,7 @@ void Mesh::initMesh()
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mTangent));
 	glEnableVertexAttribArray(3);
 	// vertex biTangent
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mBiTangent));
+	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, mBiTangent));
 	glEnableVertexAttribArray(4);
 
 	glBindVertexArray(0);
