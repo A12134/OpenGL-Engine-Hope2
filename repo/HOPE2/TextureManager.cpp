@@ -7,6 +7,7 @@ LogManager* TextureManager::mLogManager;
 
 TextureManager::TextureManager()
 {
+	mMaterials = std::vector<Material>();
 }
 
 
@@ -22,7 +23,7 @@ Material* TextureManager::createMaterial(std::string name)
 		Material tmp;
 		tmp.mName = name;
 		this->mMaterials.push_back(tmp);
-		return &this->mMaterials.at(mMaterials.size() - 1);
+		return &this->mMaterials.back();
 	}
 	mLogManager->addLog(ELogType::E_WARNING, "Material name " + name + " already exist.");
 	return ptr;

@@ -3,9 +3,8 @@
 #include "Window.h"
 #include "LogManager.h"
 #include "ShaderManager.h"
-#include "SimpleCamera.h"
-#include "MeshManager.h"
 #include "TextureManager.h"
+#include "GameObject.h"
 
 enum class EGameState 
 {
@@ -22,8 +21,9 @@ private:
 	Window * mGameWindow;				// game window
 	ShaderManager* mShaderManager;		// GLSL shader manager
 	SimpleCamera* mCamera;				// game Camera
-	MeshManager* mMeshManager;			// game mesh Manager
 	TextureManager* mTextureManager;	// game texture Manager
+
+	std::vector<GameObject*> mGameObjects;
 
 public:
 	GameEvent(Window* _window);

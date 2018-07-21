@@ -50,7 +50,7 @@ int main()
 		float TSS = (float)glfwGetTime();	// time since loop start
 		float deltaSec = TSS - OTSS;		// calculate deltaSeconds
 		OTSS = TSS;
-		mainWindow->clearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mainWindow->clearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		mainWindow->clearBuffers();
 
 		// loop throught gameEvent

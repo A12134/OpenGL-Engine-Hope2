@@ -4,11 +4,6 @@
 LogManager* GameObject::mLogManager;
 TextureManager* GameObject::mTexManager;
 
-GameObject::GameObject()
-{
-	mMaterial = nullptr;
-}
-
 GameObject::GameObject(std::string meshFile, Material* mat, transformation trans, ShaderProgram* sp)
 {
 	mMaterial = mat;
@@ -108,6 +103,8 @@ Mesh * GameObject::processMesh(aiMesh * mesh, const aiScene * scene, std::string
 		{
 			vertex.mTexCoords = vec2(0.0f, 0.0f);
 		}
+
+		vertices.push_back(vertex);
 	}
 
 	// indices
@@ -179,6 +176,10 @@ Mesh * GameObject::processMesh(aiMesh * mesh, const aiScene * scene, std::string
 	return new Mesh(vertices, indices);
 }
 
+void GameObject::update(float deltaSeconds)
+{
+}
+
 void GameObject::render(SimpleCamera * cam)
 {
 	mat4 model = mat4(1.0f);
@@ -188,6 +189,6 @@ void GameObject::render(SimpleCamera * cam)
 
 	for (unsigned int i = 0; i < this->mMeshes.size(); i++)
 	{
-		mMeshes.at(i)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix, this->mMaterial);
+		mMeshes.at(i)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix(), this->mMaterial);
 	}
 }

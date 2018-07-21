@@ -1,7 +1,7 @@
 #ifndef SIMPLE_CAMERA_H
-#define SIMPLE_CAMER_H
+#define SIMPLE_CAMERA_H
 #include "BaseCamera.h"
-#include "LogManager.h"
+
 class SimpleCamera:
 	public BaseCamera
 {

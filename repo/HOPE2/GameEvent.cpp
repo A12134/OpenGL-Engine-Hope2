@@ -1,7 +1,6 @@
 #include "GameEvent.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
-#include "BaseCamera.h"
 
 // static object pre-declaration
 LogManager* GameEvent::mLogManager;
@@ -16,12 +15,13 @@ GameEvent::GameEvent(Window * _window)
 	mLogManager->addLog(ELogType::E_EVENT, "Hook cameras with the window.");
 	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
 	this->mShaderManager = new ShaderManager();
-	this->mMeshManager = new MeshManager();
 	this->mTextureManager = new TextureManager();
+	GameObject::mTexManager = this->mTextureManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Texture Manager(GameObject).");
 
 	// init camera
 	this->mCamera = new SimpleCamera(
-		vec3(0.0f, 0.0f, 0.0f),
+		vec3(0.0f, 0.0f, -1.0f),
 		vec3(0.0f, 0.0f, 0.1f),
 		65.0f,
 		1366.0f,
@@ -30,6 +30,22 @@ GameEvent::GameEvent(Window * _window)
 		1000.0f
 	);
 	mLogManager->addLog(ELogType::E_EVENT, "initializing Camera.");
+
+
+	//--------------------- testing code ------------------
+
+	mShaderManager->createNewShader("sampleVertexShader.glsl", "sampleFragmentShader.glsl", "sampleShader");
+
+	this->mGameObjects.push_back(
+		new GameObject(
+			"assets/nanoSuit//nanosuit.obj",
+			transformation(vec3(0.0f), 0.0f, vec3(1.0f)),
+			mShaderManager->getShader("sampleShader")
+		)
+	);
+
+	// ----------------------------------------------------
+
 }
 
 void GameEvent::HookLogManager()
@@ -40,12 +56,13 @@ void GameEvent::HookLogManager()
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
 	ShaderManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Manager).");
-	MeshManager::mLogManager = this->mLogManager;
-	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Mesh Manager).");
 	BaseCamera::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Base Camera).");
 	TextureManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Texture Manager).");
+	GameObject::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Game Object).");
+
 }
 
 void GameEvent::setCurrentState(EGameState state)
@@ -63,10 +80,15 @@ void GameEvent::setCurrentState(EGameState state)
 
 void GameEvent::debugUpdate(float deltaSeconds)
 {
+	this->mCamera->update(deltaSeconds);
 }
 
 void GameEvent::debugRender()
 {
+	for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
+	{
+		this->mGameObjects.at(i)->render(this->mCamera);
+	}
 }
 
 void GameEvent::update(float deltaSeconds)
@@ -95,8 +117,6 @@ void GameEvent::render()
 
 GameEvent::~GameEvent()
 {
-	delete mMeshManager;
-	mMeshManager = nullptr;
 
 	delete mCamera;
 	mCamera = nullptr;

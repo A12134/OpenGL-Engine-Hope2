@@ -5,6 +5,7 @@ LogManager* ShaderProgram::mLogManager;
 
 ShaderProgram::ShaderProgram(const std::string shaderName)
 {
+	this->mProgramName = shaderName;
 }
 
 ShaderProgram::~ShaderProgram()

@@ -10,12 +10,6 @@ ShaderManager::ShaderManager()
 ShaderManager::~ShaderManager()
 {
 	mLogManager->addLog(ELogType::E_EVENT, "Unloading shaders.");
-	for (unsigned int i = 0; i < mShaders.size(); i++)
-	{
-		delete mShaders.at(i);
-		mShaders.at(i) = nullptr;
-	}
-
 	mShaders.clear();
 }
 
@@ -26,8 +20,8 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 
 	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
 
-	ShaderProgram* thisProgram = new ShaderProgram(shaderName);
-	thisProgram->linkShaders(vertexShader->getShader());
+	ShaderProgram thisProgram = ShaderProgram(shaderName);
+	thisProgram.linkShaders(vertexShader->getShader());
 
 	mShaders.push_back(thisProgram);
 
@@ -45,8 +39,8 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 
 	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
 
-	ShaderProgram* thisProgram = new ShaderProgram(shaderName);
-	thisProgram->linkShaders(vertexShader->getShader(), fragmentShader->getShader());
+	ShaderProgram thisProgram = ShaderProgram(shaderName);
+	thisProgram.linkShaders(vertexShader->getShader(), fragmentShader->getShader());
 
 	mShaders.push_back(thisProgram);
 
@@ -70,8 +64,8 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 
 	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
 
-	ShaderProgram* thisProgram = new ShaderProgram(shaderName);
-	thisProgram->linkShaders(vertexShader->getShader(), fragmentShader->getShader(), geometryShader->getShader());
+	ShaderProgram thisProgram = ShaderProgram(shaderName);
+	thisProgram.linkShaders(vertexShader->getShader(), fragmentShader->getShader(), geometryShader->getShader());
 
 	mShaders.push_back(thisProgram);
 
@@ -89,9 +83,9 @@ ShaderProgram * ShaderManager::getShader(const std::string shaderName)
 {
 	for (unsigned int i = 0; i < mShaders.size(); i++)
 	{
-		if (mShaders.at(i)->matchName(shaderName))
+		if (mShaders.at(i).matchName(shaderName))
 		{
-			return mShaders.at(i);
+			return &mShaders.at(i);
 		}
 	}
 	mLogManager->addLog(ELogType::E_ERROR, "Shader " + shaderName + " does not exist!");

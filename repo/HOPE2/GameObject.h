@@ -1,5 +1,6 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
+#include "SimpleCamera.h"
 #include "LogManager.h"
 #include "TextureManager.h"
 #include <vector>
@@ -11,7 +12,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "BaseCamera.h"
 #include "ShaderProgram.h"
 
 using namespace glm;
@@ -24,6 +24,7 @@ struct transformation
 		rotation(_rotation),
 		scale(_scale)
 	{};
+
 	vec3 position;
 	float rotation;
 	vec3 scale;
@@ -45,7 +46,6 @@ private:
 	std::vector<Texture *> mTexes;
 
 public:
-	GameObject();
 	GameObject(std::string meshFile, Material* mat, transformation trans, ShaderProgram* sp);
 	// GameObject(model, texture)
 	GameObject(std::string meshFile, transformation trans, ShaderProgram* sp);
@@ -58,7 +58,7 @@ private:
 	Mesh* processMesh(aiMesh * mesh, const aiScene * scene, std::string fileName, std::string directory);
 
 public:
-	virtual void update(float deltaSeconds) = 0;
+	virtual void update(float deltaSeconds);
 	virtual void render(SimpleCamera* cam);
 
 };

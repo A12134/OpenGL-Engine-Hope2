@@ -130,7 +130,7 @@ void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Ma
 	sp->setUniform1uiv("specularMap", 10, texArray);
 
 	mat4 matrices = projection * view * model;
-	sp->setUniformMatrix4x4fv("transformation", matrices, GL_FALSE);
+	sp->setUniformMatrix4x4fv("transformation", mat4(1), GL_FALSE);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, this->mIndices.size(), GL_UNSIGNED_INT, 0);
