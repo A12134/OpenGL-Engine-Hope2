@@ -5,9 +5,10 @@ LogManager* Mesh::mLogManager;
 
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices)
 {
-	//this->mVertices = vertices;
-	//this->mIndices = indices;
+	this->mVertices = vertices;
+	this->mIndices = indices;
 
+	/*	-------- Triangle ------
 	Vertex v1;
 	v1.mPosition = vec3(0.5f, 0.5f, 0.0f);
 	v1.mNormal = vec3(1);
@@ -44,7 +45,7 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices)
 	//this->mIndices.push_back(1);
 	//this->mIndices.push_back(2);
 	//this->mIndices.push_back(3);
-
+	*/
 	initMesh();
 }
 
@@ -169,13 +170,11 @@ void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Ma
 	sp->setUniform1uiv("specularMap", 10, texArray);
 
 	mat4 matrices =  projection * view * model;
-	//sp->setUniformMatrix4x4fv("transform", matrices, GL_FALSE);
-
-	unsigned int transformationLoc = glGetUniformLocation(sp->getID(), "transform");
-	glUniformMatrix4fv(transformationLoc, 1, GL_FALSE, value_ptr(matrices));
+	
+	sp->setUniformMatrix4x4fv("transform", matrices, GL_FALSE);
 
 	glBindVertexArray(VAO);
-	glDrawElements(GL_LINE_LOOP, this->mIndices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, this->mIndices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
 	// set back to default

@@ -187,10 +187,10 @@ void GameObject::render(SimpleCamera * cam)
 	model = scale(model, mTransform.scale);
 	model = rotate(model, radians(mTransform.rotation), vec3(0.0f, 1.0f, 0.0f));
 
-	/*
+	
 	for (unsigned int i = 0; i < this->mMeshes.size(); i++)
 	{
 		mMeshes.at(i)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix(), this->mMaterial);
-	}*/
-	mMeshes.at(0)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix(), this->mMaterial);
+	}
+	//mMeshes.at(0)->render(sp, model, cam->getViewMatrix(), cam->getProjectionMatrix(), this->mMaterial);
 }
