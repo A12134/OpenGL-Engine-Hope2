@@ -6,6 +6,7 @@ LogManager* ShaderProgram::mLogManager;
 ShaderProgram::ShaderProgram(const std::string shaderName)
 {
 	this->mProgramName = shaderName;
+	this->mProgramID = glCreateProgram();
 }
 
 ShaderProgram::~ShaderProgram()
