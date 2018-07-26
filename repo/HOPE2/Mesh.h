@@ -29,7 +29,7 @@ public:
 private:
 	vector<Vertex> mVertices;
 	vector<unsigned int> mIndices;
-
+	std::string mName;
 	unsigned int VAO, VBO, EBO;
 public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices);
@@ -38,7 +38,7 @@ private:
 	void initMesh();
 
 public:
-
+	std::string getName() { return mName; };
 	void render(ShaderProgram* sp, mat4 model, mat4 view, mat4 projection, Material* mat);
 
 
