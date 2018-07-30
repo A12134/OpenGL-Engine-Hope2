@@ -1,12 +1,24 @@
 #include "Model.h"
 
 MeshManager* Model::mMeshManager;
-MaterialManager* Model::mMaterialMananger;
+TextureManager* Model::mTexManager;
 
-Model::Model(MeshNode* root)
+void Model::render(ShaderProgram* sp, mat4 model, mat4 view, mat4 projection, MeshNode* node)
 {
-	mRootNode = root;
-	mCurrentNode = root;
+	for (unsigned int i = 0; i < node->getMeshIDs().size(); i++)
+	{
+		mMeshManager->renderMesh(node->getMeshIDs().at(i), sp, model, view, projection, node->getMaterialID());
+	}
+	
+	for (unsigned int  i = 0; i < node->getChildren().size(); i++)
+	{
+		render(sp, model, view, projection, node->getChildren().at(i));
+	}
+}
+
+Model::Model()
+{
+	mRootNode = new MeshNode();
 }
 
 

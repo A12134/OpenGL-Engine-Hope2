@@ -152,7 +152,6 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MaterialManager.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="MeshNode.cpp" />
@@ -170,7 +169,6 @@
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LogManager.h" />
-    <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="MeshNode.h" />

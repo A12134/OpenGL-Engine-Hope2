@@ -5,6 +5,8 @@
 #include "ShaderManager.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Model.h"
+#include "MeshManager.h"
 
 enum class EGameState 
 {
@@ -22,8 +24,12 @@ private:
 	ShaderManager* mShaderManager;		// GLSL shader manager
 	SimpleCamera* mCamera;				// game Camera
 	TextureManager* mTextureManager;	// game texture Manager
+	MeshManager* mMeshManager;			// game Mesh Manager
 
 	std::vector<GameObject*> mGameObjects;
+
+	/*------------------------Testing Class----------------------*/
+	Model* testingModel;
 
 public:
 	GameEvent(Window* _window);

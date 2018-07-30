@@ -12,10 +12,5 @@ out vec4 FragColor;
 //in mat4 t;
 void main()
 {
-	vec4 diffuse = vec4(0,0,0,0);
-	for(int i = 0; i < 10; i++)
-	{
-		diffuse += texture(diffuseMap[i], texCoord);
-	}
 	FragColor = texture(diffuseMap[0], texCoord);
 }

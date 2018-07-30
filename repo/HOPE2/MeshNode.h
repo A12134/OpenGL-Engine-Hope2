@@ -6,17 +6,20 @@ class MeshNode
 private:
 	MeshNode * mParent;
 	std::vector<MeshNode*> mChildren;
-	unsigned int mMeshID;
+	std::vector<unsigned int> mMeshIDs;
 	unsigned int mMaterialID;
 
 public:
 
 	// accessors and mutators
-	void setMeshID(unsigned int meshID) { mMeshID = meshID; }
+	//void setMeshID(unsigned int meshID) { mMeshID = meshID; }
 	void setMaterialID(unsigned int materialID) { mMaterialID = mMaterialID; }
-	unsigned int getMeshID() { return mMeshID; }
+	void addMeshID(unsigned int meshID) { mMeshIDs.push_back(meshID); }
+	//unsigned int getMeshID() { return mMeshID; }
+	std::vector<unsigned int> getMeshIDs() { return mMeshIDs; }
 	unsigned int getMaterialID() { return mMaterialID; }
 	void addChild(MeshNode* child);
+	MeshNode* addNewChild();
 	void setParent(MeshNode* parent) { mParent = parent; }
 	std::vector<MeshNode*> getChildren() { return mChildren; }
 	MeshNode* getParent() { return mParent; }

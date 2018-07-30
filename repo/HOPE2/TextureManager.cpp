@@ -29,6 +29,19 @@ Material* TextureManager::createMaterial(std::string name)
 	return ptr;
 }
 
+unsigned int TextureManager::getMaterialID(std::string name)
+{
+	for (unsigned int i = 0; i < this->mMaterials.size(); i++)
+	{
+		if (mMaterials.at(i).mName == name)
+		{
+			return i;
+		}
+	}
+	mLogManager->addLog(ELogType::E_WARNING, "Material " + name + " does not exist. ");
+	return 99999;
+}
+
 std::vector<Texture>* TextureManager::getTextures(E_TEX_TYPE type, Material* mat)
 {
 	if (mat != nullptr)

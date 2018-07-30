@@ -10,12 +10,23 @@ GameEvent::GameEvent(Window * _window)
 {
 	this->setCurrentState(EGameState::E_Debugging);
 	this->mGameWindow = _window;
+
 	HookLogManager(); 
+	
 	BaseCamera::mWindow = this->mGameWindow;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook cameras with the window.");
+	
 	// initilize all the class after this line that requires logManager. And don't forget to hook the logmanager
+	
 	this->mShaderManager = new ShaderManager();
+	
 	this->mTextureManager = new TextureManager();
+	
+	MeshManager::mTexManager = this->mTextureManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook texture Manager(Mesh Manager)");
+	
+	this->mMeshManager = new MeshManager();
+
 	GameObject::mTexManager = this->mTextureManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Texture Manager(GameObject).");
 
@@ -36,13 +47,11 @@ GameEvent::GameEvent(Window * _window)
 
 	mShaderManager->createNewShader("sampleVertexShader.glsl", "sampleFragmentShader.glsl", "sampleShader");
 
-	this->mGameObjects.push_back(
-		new GameObject(
-			"assets/nanoSuit//nanosuit.obj",
-			transformation(vec3(0.0f, 1.0f, 0.0f), 0.0f, vec3(0.1f)),
-			mShaderManager->getShader("sampleShader")
-		)
-	);
+	Model::mMeshManager = this->mMeshManager;
+	Model::mTexManager = this->mTextureManager;
+
+	testingModel = new Model();
+	mMeshManager->loadModel("assets/nanosuit//nanosuit.obj", testingModel->getRoot());
 
 	// ----------------------------------------------------
 
@@ -52,16 +61,24 @@ void GameEvent::HookLogManager()
 {
 	Shader::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader).");
+	
 	ShaderProgram::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Program).");
+	
 	ShaderManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Shader Manager).");
+	
 	BaseCamera::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Base Camera).");
+	
 	TextureManager::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Texture Manager).");
+	
 	GameObject::mLogManager = this->mLogManager;
 	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Game Object).");
+	
+	MeshManager::mLogManager = this->mLogManager;
+	mLogManager->addLog(ELogType::E_EVENT, "Hook Log Manager(Mesh Manager).");
 
 }
 
@@ -85,10 +102,7 @@ void GameEvent::debugUpdate(float deltaSeconds)
 
 void GameEvent::debugRender()
 {
-	for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
-	{
-		this->mGameObjects.at(i)->render(this->mCamera);
-	}
+	testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
 }
 
 void GameEvent::update(float deltaSeconds)

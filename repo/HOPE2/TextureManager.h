@@ -56,10 +56,12 @@ public:
 	~TextureManager();
 
 	Material* createMaterial(std::string name);
+	unsigned int getMaterialID(std::string name);
 
 	std::vector<Texture>* getTextures(E_TEX_TYPE type, Material* mat);
 
 	Material* getMaterials(std::string matName);
+	Material* getMaterialByID(unsigned int ID) { return &mMaterials.at(ID); }
 
 	void loadImage(const char* filename, E_TEX_TYPE type, Material* mat);
 };
