@@ -325,3 +325,10 @@ ASALocalRun/
 *.nvuser
 
 /repo/HOPE2/assets/nanoSuit
+repo/HOPE2/assets/Hanger/Hangar.mtl
+repo/HOPE2/assets/kitchenScene/kitchen.mtl
+repo/HOPE2/assets/kitchenScene/maps/brownwall.jpg
+repo/HOPE2/assets/kitchenScene/maps/floor.jpg
+repo/HOPE2/assets/kitchenScene/maps/texture.jpg
+repo/HOPE2/assets/kitchenScene/maps/wood.jpg
+repo/HOPE2/assets/kitchenScene/maps/woodM.jpg
