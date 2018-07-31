@@ -31,6 +31,7 @@ private:
 	vector<unsigned int> mIndices;
 	std::string mName;
 	unsigned int VAO, VBO, EBO;
+	bool setUniformSample;
 public:
 	Mesh(vector<Vertex> vertices, vector<unsigned int> indices);
 	~Mesh();
