@@ -13,7 +13,7 @@ public:
 
 	// accessors and mutators
 	//void setMeshID(unsigned int meshID) { mMeshID = meshID; }
-	void setMaterialID(unsigned int materialID) { mMaterialID = mMaterialID; }
+	void setMaterialID(unsigned int materialID) { mMaterialID = materialID; }
 	void addMeshID(unsigned int meshID) { mMeshIDs.push_back(meshID); }
 	//unsigned int getMeshID() { return mMeshID; }
 	std::vector<unsigned int> getMeshIDs() { return mMeshIDs; }
