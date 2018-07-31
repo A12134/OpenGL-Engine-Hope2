@@ -8,6 +8,8 @@ Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices)
 	this->mVertices = vertices;
 	this->mIndices = indices;
 
+	this->setUniformSample = false;
+
 	/*	-------- Triangle ------
 	Vertex v1;
 	v1.mPosition = vec3(0.5f, 0.5f, 0.0f);
@@ -86,89 +88,41 @@ void Mesh::initMesh()
 void Mesh::render(ShaderProgram * sp, mat4 model, mat4 view, mat4 projection, Material* mat)
 {
 	sp->useThis();
-	unsigned int texCount = 0;
-	unsigned int texArray[10];
 	// load diffuse
-	for (unsigned int i = 0; i < 10; i++)
+	glActiveTexture(GL_TEXTURE0);
+	if (!mat->mDiffs.empty())
 	{
-		if (i < mat->mDiffs.size())
-		{
-			glActiveTexture(GL_TEXTURE0 + texCount);
-			glBindTexture(GL_TEXTURE_2D, mat->mDiffs.at(i).mTextureID);
-			texCount++;
-			texArray[i] = texCount;
-		}
-		else
-		{
-			texArray[i] = 999;
-		}
+		sp->setUniform1i("diffuseMap", 0);
+		glBindTexture(GL_TEXTURE_2D, mat->mDiffs.at(0).mTextureID);
 	}
-	sp->setUniform1uiv("diffuseMap", 10, texArray);
 	// load normal
-	for (unsigned int i = 0; i < 10; i++)
+	glActiveTexture(GL_TEXTURE1);
+	if (!mat->mNorms.empty())
 	{
-		if (i < mat->mNorms.size())
-		{
-			glActiveTexture(GL_TEXTURE0 + texCount);
-			glBindTexture(GL_TEXTURE_2D, mat->mNorms.at(i).mTextureID);
-			texCount++;
-			texArray[i] = texCount;
-		}
-		else
-		{
-			texArray[i] = 999;
-		}
+		sp->setUniform1i("normalMap", 1);
+		glBindTexture(GL_TEXTURE_2D, mat->mNorms.at(0).mTextureID);
 	}
-	sp->setUniform1uiv("normalMap", 10, texArray);
 	// load opacity
-	for (unsigned int i = 0; i < 10; i++)
+	glActiveTexture(GL_TEXTURE2);
+	if (!mat->mOpacs.empty())
 	{
-		if (i < mat->mOpacs.size())
-		{
-			glActiveTexture(GL_TEXTURE0 + texCount);
-			glBindTexture(GL_TEXTURE_2D, mat->mOpacs.at(i).mTextureID);
-			texCount++;
-			texArray[i] = texCount;
-		}
-		else
-		{
-			texArray[i] = 999;
-		}
+		sp->setUniform1i("opacityMap", 2);
+		glBindTexture(GL_TEXTURE_2D, mat->mOpacs.at(0).mTextureID);
 	}
-	sp->setUniform1uiv("opacityMap", 10, texArray);
-	// load ambient
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		if (i < mat->mAmbients.size())
-		{
-			glActiveTexture(GL_TEXTURE0 + texCount);
-			glBindTexture(GL_TEXTURE_2D, mat->mAmbients.at(i).mTextureID);
-			texCount++;
-			texArray[i] = texCount;
-		}
-		else
-		{
-			texArray[i] = 999;
-		}
-	}
-	sp->setUniform1uiv("ambientMap", 10, texArray);
 	// load specular
-	for (unsigned int i = 0; i < 10; i++)
+	glActiveTexture(GL_TEXTURE3);
+	if (!mat->mSpecs.empty())
 	{
-		if (i < mat->mSpecs.size())
-		{
-			glActiveTexture(GL_TEXTURE0 + texCount);
-			glBindTexture(GL_TEXTURE_2D, mat->mSpecs.at(i).mTextureID);
-			texCount++;
-			texArray[i] = texCount;
-		}
-		else
-		{
-			texArray[i] = 999;
-		}
+		sp->setUniform1i("specularMap", 3);
+		glBindTexture(GL_TEXTURE_2D, mat->mSpecs.at(0).mTextureID);
 	}
-	sp->setUniform1uiv("specularMap", 10, texArray);
-
+	// load ambient
+	glActiveTexture(GL_TEXTURE4);
+	if (!mat->mAmbients.empty())
+	{
+		sp->setUniform1i("ambientMap", 4);
+		glBindTexture(GL_TEXTURE_2D, mat->mAmbients.at(0).mTextureID);
+	}
 	mat4 matrices =  projection * view * model;
 	
 	sp->setUniformMatrix4x4fv("transform", matrices, GL_FALSE);

@@ -165,10 +165,10 @@ void MeshManager::processTexture(aiMesh * mesh, const aiScene * scene, std::stri
 		}
 
 		// normal maps
-		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_NORMALS); i++)
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_HEIGHT); i++)
 		{
 			aiString str;
-			material->GetTexture(aiTextureType_NORMALS, i, &str);
+			material->GetTexture(aiTextureType_HEIGHT, i, &str);
 			std::string imagePath = directory + str.C_Str();
 			mTexManager->loadImage(imagePath.c_str(), E_TEX_TYPE::NORMAL, hMat);
 		}
