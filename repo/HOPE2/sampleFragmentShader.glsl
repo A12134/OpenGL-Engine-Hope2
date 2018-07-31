@@ -12,5 +12,5 @@ out vec4 FragColor;
 //in mat4 t;
 void main()
 {
-	FragColor = vec4(texCoord.x,texCoord.y,0.0,1.0);
+	FragColor = texture(diffuseMap, texCoord);
 }
