@@ -7,6 +7,7 @@ layout (location = 4) in vec3 aBitangent;
 
 uniform mat4 transform;
 out vec2 texCoord;
+out vec3 normal;
 //out vec3 debugPos;
 //out mat4 t;
 
@@ -14,4 +15,5 @@ void main()
 {
 	gl_Position = transform * vec4(aPos.x,aPos.y, aPos.z, 1.0);
 	texCoord = aTexCoord;
+	normal = aNormal;
 }

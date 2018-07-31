@@ -32,7 +32,7 @@ GameEvent::GameEvent(Window * _window)
 
 	// init camera
 	this->mCamera = new SimpleCamera(
-		vec3(0.0f, 10.0f, -30.0f),
+		vec3(0.0f, 8.0f, 10.0f),
 		vec3(0.0f, 0.0f, 0.0f),
 		65.0f,
 		1366.0f,
@@ -51,7 +51,7 @@ GameEvent::GameEvent(Window * _window)
 	Model::mTexManager = this->mTextureManager;
 
 	testingModel = new Model();
-	mMeshManager->loadModel("assets/nanosuit//nanosuit.obj", testingModel->getRoot());
+	mMeshManager->loadModel("assets/Hanger//Hangar.obj", testingModel->getRoot());
 
 	// ----------------------------------------------------
 

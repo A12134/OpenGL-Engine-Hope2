@@ -7,10 +7,12 @@ uniform sampler2D specularMap;
 uniform sampler2D amibentMap;
 
 in vec2 texCoord;
+in vec3 normal;
 //in vec3 debugPos;
 out vec4 FragColor;
 //in mat4 t;
 void main()
 {
-	FragColor = texture(diffuseMap, texCoord);
+	//FragColor = texture(diffuseMap, texCoord);
+	FragColor = vec4(normal*0.5+0.5, 1.0);
 }

@@ -124,7 +124,7 @@ void TextureManager::loadImage(const char * filename, E_TEX_TYPE type, Material*
 	}
 	else
 	{
-		mLogManager->addLog(ELogType::E_ERROR, "Failed to load image " + std::string(filename) + ".");
+		mLogManager->addLog(ELogType::E_ERROR, "Failed to load image " + std::string(filename));
 		mLogManager->errorExit();
 	}
 

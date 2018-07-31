@@ -97,6 +97,7 @@ Mesh * MeshManager::processMesh(aiMesh * mesh, const aiScene * scene, std::strin
 		);
 
 		// tangents
+		/*
 		vertex.mTangent = vec3(
 			mesh->mTangents[i].x,
 			mesh->mTangents[i].y,
@@ -108,7 +109,7 @@ Mesh * MeshManager::processMesh(aiMesh * mesh, const aiScene * scene, std::strin
 			mesh->mBitangents[i].x,
 			mesh->mBitangents[i].y,
 			mesh->mBitangents[i].z
-		);
+		);*/
 
 		// UVs
 		if (mesh->mTextureCoords[0])
