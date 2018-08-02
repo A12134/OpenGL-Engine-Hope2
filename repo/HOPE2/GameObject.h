@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "ShaderProgram.h"
+#include "Model.h"
 
 using namespace glm;
 
@@ -39,24 +40,14 @@ public:
 protected:
 	transformation mTransform;
 	ShaderProgram* sp;
-
-private:
-	std::vector<Mesh *> mMeshes;
-	Material* mMaterial;
-	std::vector<Texture *> mTexes;
+	Model* mMesh;
 
 public:
-	GameObject(std::string meshFile, Material* mat, transformation trans, ShaderProgram* sp);
-	// GameObject(model, texture)
-	GameObject(std::string meshFile, transformation trans, ShaderProgram* sp);
-	// GameObject(model)	// obj file cames with texture
+	GameObject(transformation trans, ShaderProgram* sp);
+
+	MeshNode* getModelRoot() { return mMesh->getRoot(); }
+
 	~GameObject();
-
-private:
-	void loadModel(std::string fileName);
-	void processNode(aiNode * node, const aiScene * scene, std::string fileName, std::string directory);
-	Mesh* processMesh(aiMesh * mesh, const aiScene * scene, std::string fileName, std::string directory);
-
 public:
 	virtual void update(float deltaSeconds);
 	virtual void render(SimpleCamera* cam);

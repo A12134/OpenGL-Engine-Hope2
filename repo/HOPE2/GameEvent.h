@@ -30,7 +30,7 @@ private:
 	std::vector<GameObject*> mGameObjects;
 
 	/*------------------------Testing Class----------------------*/
-	Model* testingModel;
+	//Model* testingModel;
 	SkyBox* testingSkyBox;
 
 public:

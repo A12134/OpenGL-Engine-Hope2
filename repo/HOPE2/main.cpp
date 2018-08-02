@@ -4,8 +4,8 @@
 #include "LogManager.h"
 #include "GameEvent.h"
 
-#define RESOLUTION_X 1366	// window width
-#define RESOLUTION_Y 768	// window height
+#define RESOLUTION_X 1920	// window width
+#define RESOLUTION_Y 1440	// window height
 
 int main() 
 {
