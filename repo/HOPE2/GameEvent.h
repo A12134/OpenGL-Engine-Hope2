@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "Model.h"
 #include "MeshManager.h"
+#include "SkyBox.h"
 
 enum class EGameState 
 {
@@ -30,6 +31,7 @@ private:
 
 	/*------------------------Testing Class----------------------*/
 	Model* testingModel;
+	SkyBox* testingSkyBox;
 
 public:
 	GameEvent(Window* _window);

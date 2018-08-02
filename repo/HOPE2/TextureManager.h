@@ -49,6 +49,7 @@ class TextureManager
 {
 private:
 	std::vector<Material> mMaterials;
+	unsigned int skyBox_1;
 public:
 	static LogManager* mLogManager;
 public:
@@ -60,6 +61,8 @@ public:
 
 	std::vector<Texture>* getTextures(E_TEX_TYPE type, Material* mat);
 
+	void loadSkyBox(std::vector<std::string> faces);
+	unsigned int getSkyBox() { return skyBox_1; }
 	Material* getMaterials(std::string matName);
 	Material* getMaterialByID(unsigned int ID) { return &mMaterials.at(ID); }
 

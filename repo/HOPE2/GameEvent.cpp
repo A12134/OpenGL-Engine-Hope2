@@ -32,7 +32,7 @@ GameEvent::GameEvent(Window * _window)
 
 	// init camera
 	this->mCamera = new SimpleCamera(
-		vec3(0.0f, 8.0f, 10.0f),
+		vec3(0.0f, 5.0f, -10.0f),
 		vec3(0.0f, 0.0f, 0.0f),
 		65.0f,
 		1366.0f,
@@ -45,7 +45,12 @@ GameEvent::GameEvent(Window * _window)
 
 	//--------------------- testing code ------------------
 
+	mShaderManager->createNewShader("skyboxVertexShader.glsl", "skyboxFragmentShader.glsl", "skyboxShader");
 	mShaderManager->createNewShader("sampleVertexShader.glsl", "sampleFragmentShader.glsl", "sampleShader");
+
+	SkyBox::mTexManager = this->mTextureManager;
+
+	this->testingSkyBox = new SkyBox(mShaderManager->getShader("skyboxShader"));
 
 	Model::mMeshManager = this->mMeshManager;
 	Model::mTexManager = this->mTextureManager;
@@ -102,6 +107,7 @@ void GameEvent::debugUpdate(float deltaSeconds)
 
 void GameEvent::debugRender()
 {
+	testingSkyBox->render(this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix());
 	testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
 }
 

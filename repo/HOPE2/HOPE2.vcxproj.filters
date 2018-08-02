@@ -75,6 +75,9 @@
     <ClCompile Include="MeshNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -122,12 +125,21 @@
     <ClInclude Include="MeshNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sampleVertexShader.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="sampleFragmentShader.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="skyboxVertexShader.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="skyboxFragmentShader.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
