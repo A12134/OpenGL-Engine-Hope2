@@ -14,9 +14,6 @@ GameObject::~GameObject()
 {
 }
 
-
-
-
 void GameObject::update(float deltaSeconds)
 {
 }

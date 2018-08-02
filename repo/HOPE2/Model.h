@@ -21,6 +21,7 @@ public:
 	~Model();
 
 	MeshNode* getRoot() { return mRootNode; }
+	void setRoot(MeshNode* node) { mRootNode = node; }
 };
 #endif
 

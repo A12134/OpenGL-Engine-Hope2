@@ -61,11 +61,12 @@ GameEvent::GameEvent(Window * _window)
 			mShaderManager->getShader("sampleShader"),	// shader
 			transformation(
 				vec3(0.0f,0.0f,0.0f),		// position
-				0.0f,		// rotation
+				180.0f,		// rotation
 				vec3(1.0f,1.0f,1.0f))		// scale
 	));
-	mMeshManager->loadModel("assets/Hanger//Hangar.obj", this->mGameObjects.back()->getModelRoot());
-
+	testingModel = new Model();
+	mMeshManager->loadModel("assets/Hanger//Hangar.obj", this->mGameObjects.at(mGameObjects.size() - 1)->getModelRoot());
+	testingModel->setRoot(this->mGameObjects.at(mGameObjects.size() - 1)->getModelRoot());
 	// ----------------------------------------------------
 
 }
@@ -116,6 +117,7 @@ void GameEvent::debugUpdate(float deltaSeconds)
 void GameEvent::debugRender()
 {
 	//testingSkyBox->render(this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix());
+	testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
 	for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
 	{
 		this->mGameObjects.at(i)->render(this->mCamera);
