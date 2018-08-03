@@ -116,8 +116,8 @@ void GameEvent::debugUpdate(float deltaSeconds)
 
 void GameEvent::debugRender()
 {
-	//testingSkyBox->render(this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix());
-	testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
+	testingSkyBox->render(this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix());
+	//testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
 	for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
 	{
 		this->mGameObjects.at(i)->render(this->mCamera);

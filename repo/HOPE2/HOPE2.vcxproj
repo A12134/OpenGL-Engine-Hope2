@@ -151,6 +151,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Hangar.cpp" />
+    <ClCompile Include="HGameObject.cpp" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Hangar.h" />
+    <ClInclude Include="HGameObject.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
