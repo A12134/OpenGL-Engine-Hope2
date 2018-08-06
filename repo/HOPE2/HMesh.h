@@ -8,7 +8,11 @@
 
 struct bone
 {
-	int mBoneID;
+	bone() :
+		mBoneName("None"),
+		mWeight(0.0f)
+	{};
+	std::string mBoneName;
 	float mWeight;
 };
 struct vertex
@@ -37,6 +41,8 @@ public:
 	void pushBack(vertex v) { mVertices.push_back(v); }
 	void pushBack(unsigned int i) { mIndices.push_back(i); }
 	void setMaterialID(unsigned int ID) { this->mMaterialID = ID; }
+
+	vertex* getVertex(unsigned int ID) { return &mVertices.at(ID); }
 
 private:
 	void initMesh();

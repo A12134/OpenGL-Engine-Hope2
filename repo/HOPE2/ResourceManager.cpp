@@ -44,6 +44,7 @@ void ResourceManager::loadMeshFile(std::string fileName)
 	newObject.setType(1);
 	this->hResources.push_back(newObject.getRID());
 	this->hObject.push_back(newObject);
+
 }
 
 unsigned int ResourceManager::loadImageFile(const char* fileName)
@@ -166,9 +167,11 @@ HMesh ResourceManager::processMesh(aiMesh * mesh, const aiScene * scene, std::st
 			v.mUV = glm::vec2(0.0f);
 		}
 
+		
 		newMesh.pushBack(v);
 	}
 
+	// load in indices
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
@@ -178,6 +181,43 @@ HMesh ResourceManager::processMesh(aiMesh * mesh, const aiScene * scene, std::st
 		}
 	}
 
+	// load in bones
+	for (unsigned int i = 0; i < mesh->mNumBones; i++)
+	{
+		aiBone* bone = mesh->mBones[i];  
+		for (unsigned int j = 0; j < bone->mNumWeights; j++)
+		{
+			// get bone name
+			aiVertexWeight weight = mesh->mBones[i]->mWeights[j];
+			vertex* v = newMesh.getVertex(weight.mVertexId);
+			if (v->mBone1.mBoneName == "None")
+			{
+				v->mBone1.mBoneName = bone->mName.C_Str();
+				v->mBone1.mWeight = weight.mWeight;
+				break;
+			}
+			else if (v->mBone2.mBoneName == "None") 
+			{
+				v->mBone2.mBoneName = bone->mName.C_Str();
+				v->mBone2.mWeight = weight.mWeight;
+				break;
+			}
+			else if (v->mBone3.mBoneName == "None") 
+			{
+				v->mBone3.mBoneName = bone->mName.C_Str();
+				v->mBone3.mWeight = weight.mWeight;
+				break;
+			}
+			else if(v->mBone4.mBoneName == "None")
+			{
+				v->mBone4.mBoneName = bone->mName.C_Str();
+				v->mBone4.mWeight = weight.mWeight;
+				break;
+			}
+		}
+	}
+
+	// load in materials
 	// if there is any material defined, acquire all image pathes and load them into a material
 	if (mesh->mMaterialIndex >= 0)
 	{
