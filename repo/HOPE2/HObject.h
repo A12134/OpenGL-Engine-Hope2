@@ -8,7 +8,6 @@ class HObject :
 {
 private:
 	std::vector<HMesh> mObject;
-	unsigned int mMaterialID;
 
 public:
 	HObject();

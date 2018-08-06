@@ -1,5 +1,7 @@
 #include "ResourceManager.h"
-
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "stb_image.h"
 
 
 ResourceManager::ResourceManager()
@@ -38,9 +40,75 @@ void ResourceManager::loadMeshFile(std::string fileName)
 
 	processNode(scene->mRootNode, scene, fileName, directory, &newObject);
 
-	newObject.setRID(hResources.size());
-	this->hResources.push_back(newObject);
-	this->hObject.push_back(hResources.size() - 1);
+	newObject.setRID(hObject.size());
+	newObject.setType(1);
+	this->hResources.push_back(newObject.getRID());
+	this->hObject.push_back(newObject);
+}
+
+unsigned int ResourceManager::loadImageFile(const char* fileName)
+{
+	HTexture tex;
+	tex.setTextureName(fileName);
+	tex.createNew2DTexture();
+
+	int width, height, nrChannels;
+	unsigned char* imageData = stbi_load(fileName, &width, &height, &nrChannels, 0);
+	
+	if (imageData)
+	{
+		GLenum format;
+		if (nrChannels == 1)
+		{
+			format = GL_RED;
+		}
+		else if (nrChannels == 3) 
+		{
+			format = GL_RGB;
+		}
+		else if (nrChannels == 4) 
+		{
+			format = GL_RGBA;
+		}
+
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, imageData);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		stbi_image_free(imageData);
+	}
+	else 
+	{
+		//errorLog
+	}
+	tex.setRID(hTexture.size());
+	tex.setType(2);
+	this->hTexture.push_back(tex);
+	return tex.getRID();
+}
+
+unsigned int ResourceManager::createMaterial(std::vector<const char*> files)
+{
+	HMaterial mat;
+	for (unsigned int i = 0; i < files.size(); i++)
+	{
+		mat.setTextureSlot(i, loadImageFile(files.at(i)));
+	}
+	mat.setRID(hMaterial.size());
+	mat.setType(3);
+	this->hMaterial.push_back(mat);
+	return mat.getRID();
+}
+
+unsigned int ResourceManager::createMaterial(std::vector<unsigned int> textures)
+{
+	HMaterial mat;
+	for (unsigned int i = 0; i < textures.size(); i++)
+	{
+		mat.setTextureSlot(i, textures.at(i));
+	}
+	mat.setRID(hMaterial.size());
+	mat.setType(3);
+	this->hMaterial.push_back(mat);
+	return mat.getRID();
 }
 
 long ResourceManager::GenerateRID(std::string fileName)
@@ -110,5 +178,55 @@ HMesh ResourceManager::processMesh(aiMesh * mesh, const aiScene * scene, std::st
 		}
 	}
 
+	// if there is any material defined, acquire all image pathes and load them into a material
+	if (mesh->mMaterialIndex >= 0)
+	{
+		std::vector<const char*> files;
+		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+		
+		// diffuse
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_DIFFUSE); i++)
+		{
+			aiString str;
+			material->GetTexture(aiTextureType_DIFFUSE, i, &str);
+			std::string imagePath = directory + str.C_Str();
+			files.push_back(imagePath.c_str());
+		}
+		// specular
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_SPECULAR); i++)
+		{
+			aiString str;
+			material->GetTexture(aiTextureType_SPECULAR, i, &str);
+			std::string imagePath = directory + str.C_Str();
+			files.push_back(imagePath.c_str());
+		}
+		// normal,  note: the assimp label the normal map as height map
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_HEIGHT); i++)
+		{
+			aiString str;
+			material->GetTexture(aiTextureType_HEIGHT, i, &str);
+			std::string imagePath = directory + str.C_Str();
+			files.push_back(imagePath.c_str());
+		}
+		// opacity
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_OPACITY); i++)
+		{
+			aiString str;
+			material->GetTexture(aiTextureType_OPACITY, i, &str);
+			std::string imagePath = directory + str.C_Str();
+			files.push_back(imagePath.c_str());
+		}
+		// displacement
+		for (unsigned int i = 0; i < material->GetTextureCount(aiTextureType_DISPLACEMENT); i++)
+		{
+			aiString str;
+			material->GetTexture(aiTextureType_DISPLACEMENT, i, &str);
+			std::string imagePath = directory + str.C_Str();
+			files.push_back(imagePath.c_str());
+		}
+
+		// load into material
+		newMesh.setMaterialID(createMaterial(files));
+	}
 	return newMesh;
 }

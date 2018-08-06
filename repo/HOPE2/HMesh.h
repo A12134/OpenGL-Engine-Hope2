@@ -28,12 +28,15 @@ class HMesh :
 private:
 	std::vector<vertex> mVertices;
 	std::vector<unsigned int> mIndices;
+	unsigned int mMaterialID;
+
 public:
 	HMesh();
 	~HMesh();
 
 	void pushBack(vertex v) { mVertices.push_back(v); }
 	void pushBack(unsigned int i) { mIndices.push_back(i); }
+	void setMaterialID(unsigned int ID) { this->mMaterialID = ID; }
 
 private:
 	void initMesh();
