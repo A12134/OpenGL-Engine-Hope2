@@ -69,6 +69,30 @@ GameEvent::GameEvent(Window * _window)
 	testingModel->setRoot(this->mGameObjects.at(mGameObjects.size() - 1)->getModelRoot());
 	// ----------------------------------------------------
 
+
+	// Playing around code
+	glGenFramebuffers(1, &fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE)
+	{
+		glGenTextures(1, &this->screenColorBuffer);
+		glBindTexture(GL_TEXTURE_2D, screenColorBuffer);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 800, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenColorBuffer, 0);
+
+		glGenRenderbuffers(1, &rboDepthStencil);
+		glBindRenderbuffer(GL_RENDERBUFFER, rboDepthStencil);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 800);
+
+		glFramebufferRenderbuffer(
+			GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rboDepthStencil
+		);
+	}
 }
 
 void GameEvent::HookLogManager()
@@ -117,11 +141,11 @@ void GameEvent::debugUpdate(float deltaSeconds)
 void GameEvent::debugRender()
 {
 	testingSkyBox->render(this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix());
-	//testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
-	for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
+	testingModel->render(mShaderManager->getShader("sampleShader"), mat4(1), this->mCamera->getViewMatrix(), this->mCamera->getProjectionMatrix(), testingModel->getRoot());
+	/*for (unsigned int i = 0; i < this->mGameObjects.size(); i++)
 	{
 		this->mGameObjects.at(i)->render(this->mCamera);
-	}
+	}*/
 }
 
 void GameEvent::update(float deltaSeconds)

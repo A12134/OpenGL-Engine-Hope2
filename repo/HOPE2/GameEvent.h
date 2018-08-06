@@ -33,6 +33,11 @@ private:
 	Model* testingModel;
 	SkyBox* testingSkyBox;
 
+	// Playing around codes
+	unsigned int fbo;
+	unsigned int screenColorBuffer;
+	unsigned int rboDepthStencil;
+
 public:
 	GameEvent(Window* _window);
 
