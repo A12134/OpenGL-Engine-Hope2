@@ -38,13 +38,16 @@ public:
 	void loadMeshFile(std::string fileName);
 
 	// Load in image files
-	void loadImageFile(std::string fileName);
-
+	unsigned int loadImageFile(std::string fileName);
 
 
 private:
 	// Returns an unique RID by fileName
 	long GenerateRID(std::string fileName);
+
+	void processNode(aiNode* node, const aiScene * scene, std::string fileName, std::string directory, HObject* newObject);
+
+	HMesh processMesh(aiMesh* mesh, const aiScene * scene, std::string fileName, std::string directory);
 };
 #endif
 
