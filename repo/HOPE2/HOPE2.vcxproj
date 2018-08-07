@@ -104,7 +104,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\includes;$(SolutionDir)\ResourceManager\;$(SolutionDir)\LogManager</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -136,7 +136,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\includes;$(SolutionDir)\ResourceManager\;$(SolutionDir)\LogManager</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -151,13 +151,20 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Hangar.cpp" />
+    <ClCompile Include="HAudio.cpp" />
     <ClCompile Include="HGameObject.cpp" />
+    <ClCompile Include="HMaterial.cpp" />
+    <ClCompile Include="HMesh.cpp" />
+    <ClCompile Include="HObject.cpp" />
+    <ClCompile Include="HTexture.cpp" />
+    <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="LogManager\LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="MeshNode.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ResourceManager\HAudio.cpp" />
     <ClCompile Include="ResourceManager\HMaterial.cpp" />
@@ -170,6 +177,9 @@
     <ClCompile Include="ResourceManager\ShaderProgram.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="SimpleCamera.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -183,11 +193,17 @@
     <ClInclude Include="Hangar.h" />
     <ClInclude Include="HAudio.h" />
     <ClInclude Include="HGameObject.h" />
+    <ClInclude Include="HMaterial.h" />
+    <ClInclude Include="HMesh.h" />
+    <ClInclude Include="HObject.h" />
+    <ClInclude Include="HTexture.h" />
+    <ClInclude Include="LogManager.h" />
     <ClInclude Include="LogManager\LogManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="MeshNode.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="ResourceManager\HAudio.h" />
     <ClInclude Include="ResourceManager\HMaterial.h" />
@@ -200,6 +216,9 @@
     <ClInclude Include="ResourceManager\ShaderProgram.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="SimpleCamera.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="stb_image.h" />
