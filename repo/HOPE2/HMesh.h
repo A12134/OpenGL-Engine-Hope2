@@ -5,6 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include "HMaterial.h"
+#include "ShaderProgram.h"
 
 struct bone
 {
@@ -33,6 +35,7 @@ private:
 	std::vector<vertex> mVertices;
 	std::vector<unsigned int> mIndices;
 	unsigned int mMaterialID;
+	unsigned int EBO, VAO, VBO;
 
 public:
 	HMesh();
@@ -43,6 +46,8 @@ public:
 	void setMaterialID(unsigned int ID) { this->mMaterialID = ID; }
 
 	vertex* getVertex(unsigned int ID) { return &mVertices.at(ID); }
+
+	void render(glm::mat4 model, glm::mat4 view, glm::mat4 projection, HMaterial* mat, ShaderProgram* sp);
 
 private:
 	void initMesh();

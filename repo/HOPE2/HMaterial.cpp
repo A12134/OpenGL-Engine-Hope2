@@ -83,3 +83,75 @@ void HMaterial::setTextureSlot(int num, unsigned int ID)
 		break;
 	}
 }
+
+unsigned int HMaterial::getTextureSlot(int num)
+{
+	switch (num)
+	{
+	case 0:
+		if (this->textureSlot00 != 0xffffffffffffffff)
+		{
+			return this->textureSlot00;
+		}
+		break;
+	case 1:
+		if (this->textureSlot01 != 0xffffffffffffffff)
+		{
+			return this->textureSlot01;
+		}
+		break;
+	case 2:
+		if (this->textureSlot02 != 0xffffffffffffffff)
+		{
+			return this->textureSlot02 ;
+		}
+		break;
+	case 3:
+		if (this->textureSlot03 != 0xffffffffffffffff)
+		{
+			return this->textureSlot03 ;
+		}
+		break;
+	case 4:
+		if (this->textureSlot04 != 0xffffffffffffffff)
+		{
+			return this->textureSlot04 ;
+		}
+		break;
+	case 5:
+		if (this->textureSlot05 != 0xffffffffffffffff)
+		{
+			return this->textureSlot05 ;
+		}
+		break;
+	case 6:
+		if (this->textureSlot06 != 0xffffffffffffffff)
+		{
+			return this->textureSlot06 ;
+		}
+		break;
+	case 7:
+		if (this->textureSlot07 != 0xffffffffffffffff)
+		{
+			return this->textureSlot07 ;
+		}
+		break;
+	case 8:
+		if (this->textureSlot08 != 0xffffffffffffffff)
+		{
+			return this->textureSlot08 ;
+		}
+		break;
+	case 9:
+		if (this->textureSlot09 != 0xffffffffffffffff)
+		{
+			return this->textureSlot09 ;
+		}
+		break;
+	default:
+		// slot does not exist;
+		return 0xffffffffffffffff;
+		break;
+	}
+	return 0xffffffffffffffff;
+}

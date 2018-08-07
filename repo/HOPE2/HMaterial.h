@@ -20,6 +20,10 @@ public:
 	~HMaterial();
 
 	void setTextureSlot(int num, unsigned int ID);
+
+	// @param: slot num: 0-9
+	// @return: the address of the texture
+	unsigned int getTextureSlot(int num);
 };
 #endif
 
