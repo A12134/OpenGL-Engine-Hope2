@@ -8,6 +8,8 @@
 #include "psapi.h"
 #pragma comment(lib, "user32.lib")
 
+std::string LogManager::mEventLog;
+bool LogManager::mEnableLog;
 
 LogManager::LogManager()
 {
@@ -109,8 +111,60 @@ void LogManager::errorExit()
 		MB_OK
 	) == IDOK)
 	{
+		if (mEnableLog)
+		{
+			std::time_t t = time(0);
+			struct tm now;
+			localtime_s(&now, &t);
+			// generate log name
+			std::string filename = "Output-" +
+				std::to_string(now.tm_year + 1900) + "-"
+				+ std::to_string(now.tm_mon + 1) + "-"
+				+ std::to_string(now.tm_mday) + ".log";
 
+			std::ofstream outputFile;
+			outputFile.open(filename);
+
+			std::ostringstream ostream;
+
+			MEMORYSTATUSEX memInfo;
+			memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+			GlobalMemoryStatusEx(&memInfo);
+
+			//Physical memory
+			ostream << memInfo.ullTotalPhys / 1024 / 1024;
+			std::string totalPhysMem = ostream.str();
+
+			ostream.str("");
+			ostream.clear();
+
+			//Used Memory
+			std::stringstream stream;
+			PROCESS_MEMORY_COUNTERS_EX pmc;
+			GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+			stream << pmc.WorkingSetSize / 1024 / 1024;
+			std::string physMemUsedByEngine = stream.str();
+
+			float memUsage = 100 *
+				(pmc.WorkingSetSize / 1024 / 1024)
+				/ (memInfo.ullTotalPhys / 1024 / 1024);
+
+			stream.str("");
+			stream.clear();
+
+			outputFile << std::to_string(now.tm_year + 1900) + "-" + std::to_string(now.tm_mon + 1) + "-" + std::to_string(now.tm_mday) << "\n";
+			outputFile << "Total Memory: " << totalPhysMem << "MB\n";
+			outputFile << "Used Memory:	 " << physMemUsedByEngine << "MB\n";
+			outputFile << "Memory Usage: " << memUsage << "%\n";
+			outputFile << "---------------------------------------------\n";
+			outputFile << mEventLog << "\n";
+			outputFile << "---------------------------------------------\n";
+			outputFile << "Hope 2 Log Ended.\n";
+			outputFile.close();
+		}
 	}
-	delete this;
+
+
+
 	exit(-1);
 }

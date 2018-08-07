@@ -47,6 +47,8 @@ public:
 
 	vertex* getVertex(unsigned int ID) { return &mVertices.at(ID); }
 
+	unsigned int getMaterialID() { return mMaterialID; }
+
 	void render(glm::mat4 model, glm::mat4 view, glm::mat4 projection, HMaterial* mat, ShaderProgram* sp);
 
 private:

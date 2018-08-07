@@ -2,7 +2,11 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "stb_image.h"
-
+#include "LogManager.h"
+std::vector<HObject> ResourceManager::hObject;
+std::vector<HTexture> ResourceManager::hTexture;
+std::vector<HMaterial> ResourceManager::hMaterial;
+std::vector<unsigned int> ResourceManager::hAudio;
 
 ResourceManager::ResourceManager()
 {
@@ -32,6 +36,8 @@ void ResourceManager::loadMeshFile(std::string fileName)
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) 
 	{
 		// debug Info
+		LogManager::addLog(ELogType::E_ERROR, std::string(import.GetErrorString()));
+		LogManager::errorExit();
 	}
 
 	std::string directory = fileName.substr(0, fileName.find_last_of('/'));
@@ -40,10 +46,16 @@ void ResourceManager::loadMeshFile(std::string fileName)
 
 	processNode(scene->mRootNode, scene, fileName, directory, &newObject);
 
+	// store all the material id at the HObject class to be used at higher level heriachy later, to bypass the resourceManager Dependency Issue.
+	for (unsigned int i = 0; i < newObject.getMeshNum(); i++)
+	{
+		newObject.pushBack(newObject.getMatAtMeshAt(i));
+	}
+
 	newObject.setRID(hObject.size());
 	newObject.setType(1);
-	this->hResources.push_back(newObject.getRID());
-	this->hObject.push_back(newObject);
+	hResources.push_back(newObject.getRID());
+	hObject.push_back(newObject);
 
 }
 
@@ -79,10 +91,12 @@ unsigned int ResourceManager::loadImageFile(const char* fileName)
 	else 
 	{
 		//errorLog
+		LogManager::addLog(ELogType::E_ERROR, "Failed to load image " + std::string(fileName));
+		LogManager::errorExit();
 	}
 	tex.setRID(hTexture.size());
 	tex.setType(2);
-	this->hTexture.push_back(tex);
+	hTexture.push_back(tex);
 	return tex.getRID();
 }
 
@@ -95,7 +109,7 @@ unsigned int ResourceManager::createMaterial(std::vector<const char*> files)
 	}
 	mat.setRID(hMaterial.size());
 	mat.setType(3);
-	this->hMaterial.push_back(mat);
+	hMaterial.push_back(mat);
 	return mat.getRID();
 }
 
@@ -108,7 +122,7 @@ unsigned int ResourceManager::createMaterial(std::vector<unsigned int> textures)
 	}
 	mat.setRID(hMaterial.size());
 	mat.setType(3);
-	this->hMaterial.push_back(mat);
+	hMaterial.push_back(mat);
 	return mat.getRID();
 }
 

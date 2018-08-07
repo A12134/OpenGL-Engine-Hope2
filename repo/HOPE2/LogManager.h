@@ -12,15 +12,15 @@ enum class ELogType
 class LogManager
 {
 private:
-	std::string mEventLog;
-	bool mEnableLog;
+	static std::string mEventLog;
+	static bool mEnableLog;
 
 public:
 	LogManager();
 	~LogManager();
 
-	void addLog(ELogType logType, std::string _log);
-	void errorExit();
+	static void addLog(ELogType logType, std::string _log);
+	static void errorExit();
 };
 
 #endif
