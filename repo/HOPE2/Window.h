@@ -10,8 +10,6 @@ class Window
 private:
 	GLFWwindow * mWindow;
 public:
-	static LogManager* mLogManager;
-public:
 	Window(int width, int height, const char* title, GLFWmonitor* monitor, GLFWwindow* share);
 	~Window();
 

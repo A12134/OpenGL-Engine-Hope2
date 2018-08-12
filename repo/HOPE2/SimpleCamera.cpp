@@ -18,7 +18,7 @@ SimpleCamera::SimpleCamera(vec3 camPos, vec3 camTarget, float left, float right,
 
 SimpleCamera::~SimpleCamera()
 {
-	this->mLogManager->addLog(ELogType::E_EVENT, "Destory Camera Object.");
+	LogManager::addLog(ELogType::E_EVENT, "Destory Camera Object.");
 }
 
 void SimpleCamera::setupCamera(vec3 camPos, vec3 camTarget)

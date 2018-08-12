@@ -3,8 +3,6 @@
 #include "GLFW/glfw3.h"
 #include "stb_image.h"
 
-LogManager* TextureManager::mLogManager;
-
 TextureManager::TextureManager()
 {
 	mMaterials = std::vector<Material>();
@@ -25,7 +23,7 @@ Material* TextureManager::createMaterial(std::string name)
 		this->mMaterials.push_back(tmp);
 		return &this->mMaterials.back();
 	}
-	mLogManager->addLog(ELogType::E_WARNING, "Material name " + name + " already exist.");
+	LogManager::addLog(ELogType::E_WARNING, "Material name " + name + " already exist.");
 	return ptr;
 }
 
@@ -38,7 +36,7 @@ unsigned int TextureManager::getMaterialID(std::string name)
 			return i;
 		}
 	}
-	mLogManager->addLog(ELogType::E_WARNING, "Material " + name + " does not exist. ");
+	LogManager::addLog(ELogType::E_WARNING, "Material " + name + " does not exist. ");
 	return 99999;
 }
 
@@ -68,7 +66,7 @@ std::vector<Texture>* TextureManager::getTextures(E_TEX_TYPE type, Material* mat
 			break;
 		}
 	}
-	mLogManager->addLog(ELogType::E_WARNING, "Does not find the material.");
+	LogManager::addLog(ELogType::E_WARNING, "Does not find the material.");
 	return nullptr;
 }
 
@@ -89,8 +87,8 @@ void TextureManager::loadSkyBox(std::vector<std::string> faces)
 		}
 		else
 		{
-			mLogManager->addLog(ELogType::E_ERROR, "Skybox texture failed to load path: " + faces[i]);
-			mLogManager->errorExit();
+			LogManager::addLog(ELogType::E_ERROR, "Skybox texture failed to load path: " + faces[i]);
+			LogManager::errorExit();
 		}
 	}
 
@@ -110,7 +108,7 @@ Material * TextureManager::getMaterials(std::string matName)
 			return &mMaterials.at(i);
 		}
 	}
-	mLogManager->addLog(ELogType::E_WARNING, "Material " + matName + " does not exist. ");
+	LogManager::addLog(ELogType::E_WARNING, "Material " + matName + " does not exist. ");
 	return nullptr;
 }
 
@@ -153,8 +151,8 @@ void TextureManager::loadImage(const char * filename, E_TEX_TYPE type, Material*
 	}
 	else
 	{
-		mLogManager->addLog(ELogType::E_ERROR, "Failed to load image " + std::string(filename));
-		mLogManager->errorExit();
+		LogManager::addLog(ELogType::E_ERROR, "Failed to load image " + std::string(filename));
+		LogManager::errorExit();
 	}
 
 	switch (type)

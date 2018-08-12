@@ -3,8 +3,6 @@
 #include <fstream>
 #include <iostream>
 
-LogManager* Shader::mLogManager;
-
 
 Shader::Shader(EShaderType type, GLint ID)
 {
@@ -26,7 +24,7 @@ Shader::Shader(EShaderType type, GLint ID)
 		tmpType = "";
 		break;
 	}
-	mLogManager->addLog(ELogType::E_EVENT, "Create " + tmpType + ".");
+	LogManager::addLog(ELogType::E_EVENT, "Create " + tmpType + ".");
 }
 
 void Shader::loadShaderSource(const std::string & filePath)
@@ -36,14 +34,14 @@ void Shader::loadShaderSource(const std::string & filePath)
 
 	if (!file.good())
 	{
-		mLogManager->addLog(ELogType::E_ERROR, "Cannot find " + filePath + ".");
-		mLogManager->errorExit();
+		LogManager::addLog(ELogType::E_ERROR, "Cannot find " + filePath + ".");
+		LogManager::errorExit();
 	}
 
 	std::stringstream stream;
 	stream << file.rdbuf();
 	file.close();
-	mLogManager->addLog(ELogType::E_EVENT, "Load shader source from " + filePath + ".");
+	LogManager::addLog(ELogType::E_EVENT, "Load shader source from " + filePath + ".");
 
 	std::string mShaderSource = stream.str();
 	const char* sourceChar = mShaderSource.c_str();
@@ -57,11 +55,11 @@ void Shader::loadShaderSource(const std::string & filePath)
 	{
 		glGetShaderInfoLog(this->mShaderAddress, 512, NULL, infoLog);
 		std::string infoLogStr = infoLog;
-		mLogManager->addLog(ELogType::E_ERROR, "Fail to compile shader source from " + filePath + ":\n" + infoLogStr);
-		mLogManager->errorExit();
+		LogManager::addLog(ELogType::E_ERROR, "Fail to compile shader source from " + filePath + ":\n" + infoLogStr);
+		LogManager::errorExit();
 	}
 
-	mLogManager->addLog(ELogType::E_EVENT, "Compiled " + filePath + ".");
+	LogManager::addLog(ELogType::E_EVENT, "Compiled " + filePath + ".");
 }
 
 Shader::~Shader()

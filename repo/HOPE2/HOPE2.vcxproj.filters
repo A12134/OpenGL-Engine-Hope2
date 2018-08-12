@@ -66,31 +66,13 @@
     <ClCompile Include="SimpleCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stb_image.cpp">
       <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MeshNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SkyBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hangar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HGameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
@@ -119,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,31 +134,13 @@
     <ClInclude Include="SimpleCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hangar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HGameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -202,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

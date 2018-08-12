@@ -6,7 +6,6 @@
 #include "TextureManager.h"
 #include "GameObject.h"
 #include "Model.h"
-#include "MeshManager.h"
 #include "SkyBox.h"
 
 enum class EGameState 
@@ -16,8 +15,6 @@ enum class EGameState
 
 class GameEvent
 {
-public:
-	static LogManager* mLogManager;	// engine log manager
 
 private:
 	EGameState mCurrentState;			// game state
@@ -25,7 +22,6 @@ private:
 	ShaderManager* mShaderManager;		// GLSL shader manager
 	SimpleCamera* mCamera;				// game Camera
 	TextureManager* mTextureManager;	// game texture Manager
-	MeshManager* mMeshManager;			// game Mesh Manager
 
 	std::vector<GameObject*> mGameObjects;
 

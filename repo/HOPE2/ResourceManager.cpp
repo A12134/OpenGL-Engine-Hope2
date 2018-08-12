@@ -7,6 +7,7 @@ std::vector<HObject> ResourceManager::hObject;
 std::vector<HTexture> ResourceManager::hTexture;
 std::vector<HMaterial> ResourceManager::hMaterial;
 std::vector<unsigned int> ResourceManager::hAudio;
+std::vector<long> ResourceManager::hResources;
 
 ResourceManager::ResourceManager()
 {

@@ -14,8 +14,6 @@ enum class EShaderType
 
 class Shader
 {
-public:
-	static LogManager* mLogManager;
 private:
 	//std::string mShaderSource;
 	unsigned int mShaderAddress;

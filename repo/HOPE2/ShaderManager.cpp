@@ -1,7 +1,5 @@
 #include "ShaderManager.h"
 
-LogManager* ShaderManager::mLogManager;
-
 ShaderManager::ShaderManager()
 {
 }
@@ -9,7 +7,7 @@ ShaderManager::ShaderManager()
 
 ShaderManager::~ShaderManager()
 {
-	mLogManager->addLog(ELogType::E_EVENT, "Unloading shaders.");
+	LogManager::addLog(ELogType::E_EVENT, "Unloading shaders.");
 	mShaders.clear();
 }
 
@@ -18,7 +16,7 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 	Shader* vertexShader = new Shader(EShaderType::EVertexShader, GL_VERTEX_SHADER);
 	vertexShader->loadShaderSource(vertexShaderSource);
 
-	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
+	LogManager::addLog(ELogType::E_EVENT, "Loaded shaders.");
 
 	ShaderProgram thisProgram = ShaderProgram(shaderName);
 	thisProgram.linkShaders(vertexShader->getShader());
@@ -37,7 +35,7 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 	Shader* fragmentShader = new Shader(EShaderType::EFragmentShader, GL_FRAGMENT_SHADER);
 	fragmentShader->loadShaderSource(fragmentShaderSource);
 
-	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
+	LogManager::addLog(ELogType::E_EVENT, "Loaded shaders.");
 
 	ShaderProgram thisProgram = ShaderProgram(shaderName);
 	thisProgram.linkShaders(vertexShader->getShader(), fragmentShader->getShader());
@@ -62,7 +60,7 @@ void ShaderManager::createNewShader(const std::string vertexShaderSource, const 
 	Shader* geometryShader = new Shader(EShaderType::EGeometryShader, GL_GEOMETRY_SHADER);
 	geometryShader->loadShaderSource(geometryShaderSource);
 
-	mLogManager->addLog(ELogType::E_EVENT, "Loaded shaders.");
+	LogManager::addLog(ELogType::E_EVENT, "Loaded shaders.");
 
 	ShaderProgram thisProgram = ShaderProgram(shaderName);
 	thisProgram.linkShaders(vertexShader->getShader(), fragmentShader->getShader(), geometryShader->getShader());
@@ -88,8 +86,8 @@ ShaderProgram * ShaderManager::getShader(const std::string shaderName)
 			return &mShaders.at(i);
 		}
 	}
-	mLogManager->addLog(ELogType::E_ERROR, "Shader " + shaderName + " does not exist!");
-	mLogManager->errorExit();
+	LogManager::addLog(ELogType::E_ERROR, "Shader " + shaderName + " does not exist!");
+	LogManager::errorExit();
 
 	return nullptr;
 }

@@ -50,8 +50,7 @@ class TextureManager
 private:
 	std::vector<Material> mMaterials;
 	unsigned int skyBox_1;
-public:
-	static LogManager* mLogManager;
+
 public:
 	TextureManager();
 	~TextureManager();

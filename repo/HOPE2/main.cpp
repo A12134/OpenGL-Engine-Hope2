@@ -9,15 +9,6 @@
 
 int main() 
 {
-
-	// initialization
-	LogManager* engineLog = new LogManager();
-
-	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(Window).");
-	Window::mLogManager = engineLog;
-	engineLog->addLog(ELogType::E_EVENT, "Hook Log Manager(GameEvent).");
-	GameEvent::mLogManager = engineLog;
-
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -29,8 +20,8 @@ int main()
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		engineLog->addLog(ELogType::E_ERROR, "Failed to initialize GLAD proc.");
-		engineLog->errorExit();
+		LogManager::addLog(ELogType::E_ERROR, "Failed to initialize GLAD proc.");
+		LogManager::errorExit();
 	}
 
 	mainWindow->createViewport(0, 0, RESOLUTION_X, RESOLUTION_Y);
@@ -39,9 +30,9 @@ int main()
 	mainWindow->enableMSAA();
 	//mainWindow->enableFaceCulling();
 
-	engineLog->addLog(ELogType::E_EVENT, "Initializing Game events.");
+	LogManager::addLog(ELogType::E_EVENT, "Initializing Game events.");
 	GameEvent* gameEvent = new GameEvent(mainWindow);
-	engineLog->addLog(ELogType::E_EVENT, "Finish initialization, starting ticks.");
+	LogManager::addLog(ELogType::E_EVENT, "Finish initialization, starting ticks.");
 
 	// main loop
 	float OTSS = 0;		// old time since loop start
@@ -61,16 +52,13 @@ int main()
 		glfwPollEvents();	
 	}
 	
-	engineLog->addLog(ELogType::E_EVENT, "Engine shutdown.");
+	LogManager::addLog(ELogType::E_EVENT, "Engine shutdown.");
 
 	delete gameEvent;
 	gameEvent = nullptr;
 
 	delete mainWindow;
 	mainWindow = nullptr;
-
-	delete engineLog;
-	engineLog = nullptr;
 
 	return 0;
 }

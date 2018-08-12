@@ -1,6 +1,4 @@
 #include "BaseCamera.h"
-
-LogManager* BaseCamera::mLogManager;
 Window* BaseCamera::mWindow;
 
 BaseCamera::BaseCamera(float fov, float width, float height, float nearz, float farz)

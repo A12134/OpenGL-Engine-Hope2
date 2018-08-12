@@ -13,9 +13,6 @@ class ShaderProgram
 private:
 	std::string mProgramName;
 	unsigned int mProgramID;
-
-public:
-	static LogManager* mLogManager;
 public:
 	ShaderProgram(const std::string shaderName);
 	~ShaderProgram();

@@ -1,8 +1,5 @@
 #include "ShaderProgram.h"
 
-LogManager* ShaderProgram::mLogManager;
-
-
 ShaderProgram::ShaderProgram(const std::string shaderName)
 {
 	this->mProgramName = shaderName;
@@ -18,7 +15,7 @@ void ShaderProgram::linkShaders(unsigned int vertexShader, unsigned int fragment
 	glAttachShader(this->mProgramID, vertexShader);
 	glAttachShader(this->mProgramID, fragmentShader);
 	glAttachShader(this->mProgramID, geometryShader);
-	mLogManager->addLog(ELogType::E_EVENT, "Links vertex, geometry and fragment shader to the program.");
+	LogManager::addLog(ELogType::E_EVENT, "Links vertex, geometry and fragment shader to the program.");
 	checkLinkStatus();
 }
 
@@ -26,14 +23,14 @@ void ShaderProgram::linkShaders(unsigned int vertexShader, unsigned int fragment
 {
 	glAttachShader(this->mProgramID, vertexShader);
 	glAttachShader(this->mProgramID, fragmentShader);
-	mLogManager->addLog(ELogType::E_EVENT, "Links vertex and fragment shader to the program.");
+	LogManager::addLog(ELogType::E_EVENT, "Links vertex and fragment shader to the program.");
 	checkLinkStatus();
 }
 
 void ShaderProgram::linkShaders(unsigned int vertexShader)
 {
 	glAttachShader(this->mProgramID, vertexShader);
-	mLogManager->addLog(ELogType::E_EVENT, "Links vertex shader to the program.");
+	LogManager::addLog(ELogType::E_EVENT, "Links vertex shader to the program.");
 	checkLinkStatus();
 }
 
@@ -48,8 +45,8 @@ void ShaderProgram::checkLinkStatus()
 	{
 		glGetProgramInfoLog(this->mProgramID, 512, NULL, infoLog);
 		std::string infoLogStr = infoLog;
-		mLogManager->addLog(ELogType::E_ERROR, "Shader program linking failed.\n" + infoLogStr);
-		mLogManager->errorExit();
+		LogManager::addLog(ELogType::E_ERROR, "Shader program linking failed.\n" + infoLogStr);
+		LogManager::errorExit();
 	}
 }
 

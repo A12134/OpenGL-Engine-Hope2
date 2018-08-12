@@ -7,8 +7,6 @@
 
 class ShaderManager
 {
-public:
-	static LogManager* mLogManager;
 private:
 	std::vector<ShaderProgram> mShaders;
 

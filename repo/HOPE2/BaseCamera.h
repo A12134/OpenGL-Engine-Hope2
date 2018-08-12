@@ -10,7 +10,6 @@ using namespace glm;
 class BaseCamera
 {
 public:
-	static LogManager* mLogManager;
 	static Window* mWindow;
 
 private:
