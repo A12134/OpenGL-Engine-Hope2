@@ -40,6 +40,8 @@ public:
 
 	void update(float deltaSec);
 
+	vec3 getCamPos() { return mCamPos; }
+
 public:
 
 	// callbacks 

@@ -105,6 +105,12 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HLight.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -173,6 +179,12 @@
     <ClInclude Include="TextureManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HLight.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sampleVertexShader.glsl">
@@ -185,6 +197,12 @@
       <Filter>Resource Files\Shaders</Filter>
     </None>
     <None Include="skyboxFragmentShader.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="vertexShaderTemplateHOPE2.glsl">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="fragmentShaderTemplateHOPE2.glsl">
       <Filter>Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>

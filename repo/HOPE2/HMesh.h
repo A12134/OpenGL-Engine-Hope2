@@ -49,10 +49,14 @@ public:
 
 	unsigned int getMaterialID() { return mMaterialID; }
 
-	void render(glm::mat4 model, glm::mat4 view, glm::mat4 projection, HMaterial* mat, ShaderProgram* sp);
+	void render(glm::mat4 model, glm::mat4 view, glm::mat4 projection, HMaterial* mat, ShaderProgram* sp, glm::vec3 camPos);
 
 private:
 	void initMesh();
+
+	void loadInLight(ShaderProgram* sp);
+
+	void loadInTexture(ShaderProgram* sp, HMaterial* mat);
 
 };
 #endif

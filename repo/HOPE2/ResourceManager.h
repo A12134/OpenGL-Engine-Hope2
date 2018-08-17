@@ -36,7 +36,8 @@ public:
 
 	// Load in mesh files
 	// It will load the skeleton and materials as well if those assets are exist inside the file
-	static void loadMeshFile(std::string fileName);
+	// @return the Index of the object in resourceManager
+	static unsigned int loadMeshFile(std::string fileName);
 
 	// Load in image files
 	// @para: file name

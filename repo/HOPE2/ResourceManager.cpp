@@ -26,7 +26,7 @@ void ResourceManager::shutDown()
 {
 }
 
-void ResourceManager::loadMeshFile(std::string fileName)
+unsigned int ResourceManager::loadMeshFile(std::string fileName)
 {
 	Assimp::Importer import;
 	const aiScene * scene = import.ReadFile(fileName,
@@ -57,7 +57,7 @@ void ResourceManager::loadMeshFile(std::string fileName)
 	newObject.setType(1);
 	hResources.push_back(newObject.getRID());
 	hObject.push_back(newObject);
-
+	return hObject.size() - 1;
 }
 
 unsigned int ResourceManager::loadImageFile(const char* fileName)

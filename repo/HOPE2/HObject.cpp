@@ -23,6 +23,6 @@ void HObject::render(SimpleCamera* cam, std::vector<HMaterial*> mats)
 	model = rotate(model, radians(mTrans.mRot), vec3(0.0f, 1.0f, 0.0f));
 	for (unsigned int i = 0; i < mObject.size(); i++)
 	{
-		mObject.at(i).render(model, cam->getViewMatrix(), cam->getProjectionMatrix(), mats.at(i), sp);
+		mObject.at(i).render(model, cam->getViewMatrix(), cam->getProjectionMatrix(), mats.at(i), sp, cam->getCamPos());
 	}
 }

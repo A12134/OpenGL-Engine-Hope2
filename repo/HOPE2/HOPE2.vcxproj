@@ -150,10 +150,12 @@
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="HAudio.cpp" />
+    <ClCompile Include="HLight.cpp" />
     <ClCompile Include="HMaterial.cpp" />
     <ClCompile Include="HMesh.cpp" />
     <ClCompile Include="HObject.cpp" />
     <ClCompile Include="HTexture.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -175,10 +177,12 @@
     <ClInclude Include="BaseCamera.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="HAudio.h" />
+    <ClInclude Include="HLight.h" />
     <ClInclude Include="HMaterial.h" />
     <ClInclude Include="HMesh.h" />
     <ClInclude Include="HObject.h" />
     <ClInclude Include="HTexture.h" />
+    <ClInclude Include="LightManager.h" />
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshNode.h" />
@@ -196,10 +200,12 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="fragmentShaderTemplateHOPE2.glsl" />
     <None Include="sampleFragmentShader.glsl" />
     <None Include="sampleVertexShader.glsl" />
     <None Include="skyboxFragmentShader.glsl" />
     <None Include="skyboxVertexShader.glsl" />
+    <None Include="vertexShaderTemplateHOPE2.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
