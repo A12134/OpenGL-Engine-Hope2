@@ -7,7 +7,6 @@ HMesh::HMesh()
 {
 }
 
-
 HMesh::~HMesh()
 {
 }

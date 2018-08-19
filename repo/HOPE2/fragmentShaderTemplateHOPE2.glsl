@@ -35,9 +35,17 @@ uniform DLight dLight[3];
 // maximum 63 point light
 uniform PLight pLight[63];
 
+in vec3 Pos;
+in vec3 Normal;
+in vec2 TexCoord;
+
 // calcuate the directional light
 void directionalLightCalculation(DLight light)
 {
+	vec3 lightDir = normalize(-light.Direction);
+	// diffuse
+	float diff = max(dot(Normal, lightDir), 0.0);
+	// specular
 	
 }
 
